@@ -1,0 +1,625 @@
+/* Minimal dark theme for Hold'em Coach */
+:root {
+  --bg: #0e1318;
+  --felt: #124a2e;
+  --felt-edge: #0a2e1c;
+  --surface: #1a2128;
+  --surface-2: #222b33;
+  --border: #2d3944;
+  --text: #e7eef5;
+  --text-dim: #95a3b2;
+  --accent: #4fc3a1;
+  --accent-2: #e9b949;
+  --danger: #e06c6c;
+  --shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  min-height: 100vh;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto auto;
+  gap: 10px;
+  padding: 10px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ===== Header ===== */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+.header-panels {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+details {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+details > summary {
+  padding: 6px 12px;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  color: var(--text-dim);
+}
+
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before {
+  content: "▸ ";
+  display: inline-block;
+  transition: transform 0.15s;
+}
+details[open] > summary::before { content: "▾ "; }
+
+.panel-body {
+  padding: 10px 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.panel-body label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  color: var(--text-dim);
+}
+
+.panel-body select,
+.panel-body input {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 6px;
+  font: inherit;
+  min-width: 80px;
+}
+
+.panel-body button {
+  background: var(--accent);
+  color: #0b1410;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ===== Table area ===== */
+.table-area {
+  background: radial-gradient(ellipse at center, var(--felt) 0%, var(--felt-edge) 80%);
+  border: 6px solid #2a1a0b;
+  border-radius: 140px / 80px;
+  padding: 20px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 14px;
+  min-height: 380px;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.5), var(--shadow);
+}
+
+.seat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 10px;
+}
+
+.seat-opponent { justify-content: center; }
+.seat-hero { justify-content: center; }
+
+.seat-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,0,0,0.35);
+  padding: 6px 10px;
+  border-radius: 6px;
+  min-width: 140px;
+}
+
+.seat-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: var(--accent);
+  border: 2px solid var(--border);
+  position: relative;
+}
+
+/* Dealer button chip on whichever seat has the button */
+.seat-avatar.has-button::after {
+  content: "D";
+  position: absolute;
+  right: -8px;
+  bottom: -6px;
+  width: 20px;
+  height: 20px;
+  line-height: 18px;
+  text-align: center;
+  border-radius: 50%;
+  background: #f5efe0;
+  color: #1a1a1a;
+  font-size: 11px;
+  font-weight: 800;
+  border: 2px solid #d9c88a;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* Turn indicator: soft ring around the seat-info card of the player to act */
+.seat.is-turn .seat-info {
+  box-shadow: 0 0 0 2px rgba(79, 195, 161, 0.35), 0 0 12px rgba(79, 195, 161, 0.4);
+  background: rgba(79, 195, 161, 0.12);
+  transition: box-shadow 0.2s, background 0.2s;
+}
+
+.seat-meta { font-size: 13px; }
+.seat-name { font-weight: 600; }
+.seat-stack { color: var(--text-dim); font-size: 12px; }
+
+/* Chip-style commitment indicator. Hidden when empty. */
+.seat-commit {
+  min-width: 48px;
+  text-align: center;
+  background: radial-gradient(circle at 35% 30%, #2b3944, #131a21);
+  border: 2px dashed rgba(233, 185, 73, 0.55);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-2);
+  min-height: 22px;
+  letter-spacing: 0.02em;
+}
+.seat-commit:empty {
+  visibility: hidden;
+  min-height: 0;
+  padding: 0;
+  border: none;
+}
+
+.hole-cards {
+  display: flex;
+  gap: 4px;
+}
+
+.hole-cards svg, .board svg {
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+
+/* ===== Center board/pot ===== */
+.center-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.board {
+  display: flex;
+  gap: 6px;
+  min-height: 100px;
+}
+
+/* Empty board slots — faint dashed rectangles so it's clear where cards go */
+.card-slot {
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.pot-graphic {
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 6px 22px 6px 38px;
+  text-align: center;
+  min-width: 110px;
+  position: relative;
+}
+
+/* Chip icon on the pot pill */
+.pot-graphic::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f1c252, #8a6422);
+  border: 2px dashed #2b1a04;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.pot-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+.pot-amount {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+.street-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ===== Action bar ===== */
+.action-bar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.action-btn {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 18px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.05s, box-shadow 0.12s;
+  min-width: 90px;
+}
+
+.action-btn:hover:not([disabled]) { background: #2f3a45; }
+.action-btn:active:not([disabled]) { transform: translateY(1px); }
+
+.action-btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.action-btn.primary {
+  background: var(--accent);
+  color: #0b1410;
+  border-color: var(--accent);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 2px 6px rgba(79, 195, 161, 0.25);
+}
+
+.action-btn.primary:hover:not([disabled]) {
+  background: #5fd3b1;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset, 0 3px 10px rgba(79, 195, 161, 0.35);
+}
+
+.action-btn.ghost {
+  background: transparent;
+  border: 1px dashed var(--border);
+  color: var(--text-dim);
+}
+
+.bet-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.sizing-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.sizing-preset {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.sizing-preset:hover:not([disabled]) {
+  color: var(--text);
+  background: rgba(255,255,255,0.04);
+  opacity: 1;
+}
+
+.sizing-preset[disabled] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+#bet-slider {
+  width: 140px;
+}
+
+#bet-amount-display {
+  color: var(--accent-2);
+  font-weight: 600;
+  min-width: 60px;
+}
+
+/* ===== Coach area ===== */
+.coach-area {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.coach-header {
+  background: var(--surface-2);
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.coach-title {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Live metrics row — Pot / To call / Equity / Pot odds */
+.coach-metrics {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  margin-left: auto;
+}
+
+.coach-metrics .metric {
+  display: inline-flex;
+  gap: 4px;
+  align-items: baseline;
+  padding: 2px 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.coach-metrics .metric label {
+  color: var(--text-dim);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.coach-metrics .metric b {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.coach-metrics .metric.highlight b { color: var(--accent); }
+
+.coach-body {
+  padding: 12px 16px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.coach-body p { margin: 0 0 8px; }
+.coach-body p:last-child { margin-bottom: 0; }
+
+.coach-body .coach-verdict {
+  font-weight: 700;
+  color: var(--accent);
+  margin: 6px 0 6px;
+  padding: 8px 10px;
+  background: rgba(79, 195, 161, 0.08);
+  border-left: 3px solid var(--accent);
+  border-radius: 2px 6px 6px 2px;
+}
+
+.coach-body .coach-verdict.bad {
+  color: var(--danger);
+  background: rgba(224, 108, 108, 0.08);
+  border-left-color: var(--danger);
+}
+.coach-body .coach-verdict.mixed {
+  color: var(--accent-2);
+  background: rgba(233, 185, 73, 0.08);
+  border-left-color: var(--accent-2);
+}
+
+.coach-body .mix-bars {
+  display: flex;
+  gap: 6px;
+  margin: 4px 0 10px;
+  font-size: 12px;
+}
+.mix-bars span {
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+.mix-bars .mix-fold { color: var(--danger); }
+.mix-bars .mix-call { color: var(--accent-2); }
+.mix-bars .mix-raise { color: var(--accent); }
+
+.coach-body .tip {
+  background: rgba(79, 195, 161, 0.08);
+  border-left: 3px solid var(--accent);
+  padding: 8px 10px;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+/* ===== Hand summary ===== */
+.hand-summary { font-size: 14px; }
+
+.hand-summary table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.hand-summary th, .hand-summary td {
+  text-align: left;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.hand-summary th { color: var(--text-dim); font-weight: 600; }
+
+/* ===== Session summary ===== */
+#session-summary dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  margin: 0;
+}
+#session-summary dt { color: var(--text-dim); }
+#session-summary dd { margin: 0; font-weight: 600; }
+
+/* ===== Glossary / tooltip ===== */
+.term {
+  border-bottom: 1px dotted rgba(79, 195, 161, 0.7);
+  cursor: help;
+  color: inherit;
+}
+
+.term:hover, .term:focus {
+  color: var(--accent);
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+.term-example {
+  border-bottom: 1px dotted rgba(79, 195, 161, 0.7);
+  color: var(--accent);
+  font-style: italic;
+}
+
+.term-tooltip {
+  position: absolute;
+  z-index: 1000;
+  max-width: 320px;
+  background: #0a1218;
+  color: var(--text);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.term-tooltip .term-label {
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.term-tooltip .term-short {
+  color: var(--text);
+}
+
+/* Glossary panel listing */
+#glossary-body .glossary-hint {
+  margin: 0 0 6px;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+#glossary-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 12px;
+  margin: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  font-size: 12px;
+}
+
+#glossary-list dt {
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+#glossary-list dd {
+  margin: 0;
+  color: var(--text-dim);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .table-area { border-radius: 80px / 50px; padding: 12px; }
+  .seat-info { min-width: 110px; }
+  #bet-slider { width: 100px; }
+  .coach-metrics { margin-left: 0; }
+  .action-btn { padding: 8px 12px; min-width: 70px; font-size: 14px; }
+}
+
+/* Hide hover tooltip on coarse-pointer / mobile — desktop-only feature */
+@media (hover: none) {
+  .term-tooltip { display: none !important; }
+  .term { border-bottom-style: dotted; cursor: text; }
+}

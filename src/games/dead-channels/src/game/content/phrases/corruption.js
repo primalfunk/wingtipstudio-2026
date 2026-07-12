@@ -1,0 +1,40 @@
+import { createPhraseEntries } from '../schema.js';
+
+export const corruptionPhrases = createPhraseEntries('corrupt', [
+  { text: 'enter the red recursion', difficulty: 2, biome: 'mirrorConduit' },
+  { text: 'touch the hostile signal', difficulty: 2, biome: 'staticBloom' },
+  { text: 'follow the black carrier', difficulty: 2, biome: 'deadRelay' },
+  { text: 'open the static wound', difficulty: 2, biome: 'staticBloom' },
+  { text: 'read the broken mirror', difficulty: 2, biome: 'mirrorConduit' },
+  { text: 'accept the warning pulse', difficulty: 2, biome: 'coreStream' },
+  { text: 'route through red static', difficulty: 3, biome: 'staticBloom' },
+  { text: 'decode the hostile beacon', difficulty: 3, biome: 'deadRelay' },
+  { text: 'follow recursive noise', difficulty: 3, biome: 'mirrorConduit' },
+  { text: 'open the corrupt packet', difficulty: 3, biome: 'signalArchive' },
+  { text: 'carry the unstable token', difficulty: 3, biome: 'coreStream' },
+  { text: 'touch the bloom fracture', difficulty: 3, biome: 'staticBloom' },
+  { text: 'enter mirror debt channel', difficulty: 3, biome: 'mirrorConduit' },
+  { text: 'read the red manifest', difficulty: 3, biome: 'deadRelay' },
+  { text: 'decode the warning echo', difficulty: 3, biome: 'signalArchive' },
+  { text: 'pull the unsafe current', difficulty: 3, biome: 'coreStream' },
+  { text: 'enter the broken checksum', difficulty: 4, biome: 'signalArchive' },
+  { text: 'cross the hostile conduit', difficulty: 4, biome: 'mirrorConduit' },
+  { text: 'accept unstable signal debt', difficulty: 4, biome: 'staticBloom' },
+  { text: 'unlock the red dead relay', difficulty: 4, biome: 'deadRelay' },
+  { text: 'thread the corruption lattice', difficulty: 4, biome: 'coreStream' },
+  { text: 'read the recursive failure', difficulty: 4, biome: 'mirrorConduit' },
+  { text: 'touch the hostile archive', difficulty: 4, biome: 'signalArchive' },
+  { text: 'route around static bloom', difficulty: 4, biome: 'staticBloom' },
+  { text: 'decode the fractured alarm', difficulty: 4, biome: 'deadRelay' },
+  { text: 'open null-recursive carrier', difficulty: 5, biome: 'mirrorConduit' },
+  { text: 'enter red channel zero', difficulty: 5, biome: 'coreStream' },
+  { text: 'parse unstable hostile syntax', difficulty: 5, biome: 'signalArchive' },
+  { text: 'hold the corrupted mirror open', difficulty: 5, biome: 'mirrorConduit' },
+  { text: 'touch the core static fracture', difficulty: 5, biome: 'staticBloom' }
+], {
+  routeType: 'corruption',
+  streamRole: 'hazard',
+  tags: ['corruption', 'risk'],
+  rewardHint: 'highScore',
+  hazardHint: 'instability'
+});

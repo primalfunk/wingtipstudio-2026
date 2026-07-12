@@ -1,0 +1,8 @@
+{
+  "name": "ancient-suffering-reborn",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/buildDist.js"
+  }
+}

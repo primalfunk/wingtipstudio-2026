@@ -1,0 +1,18 @@
+node_modules/
+dist/
+deploy/
+public/
+src/games/*/dist/
+src/games/*/src-tauri/
+src/games/*/docs/
+src/games/*/docs/design/
+src/games/*/sim_logs/
+src/games/*/src-tauri/
+*-cpanel-dist.zip
+*.log
+05.15 Angle Wars - Bureau of Bad Ideas/
+tools/
+assets/
+media/
+screenshots/
+src/games/*/*.zip

@@ -1,0 +1,34 @@
+{
+  "name": "stone-horses",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "sim": "tsx src/sim/BatchSimulator.ts",
+    "sim:quick": "tsx src/sim/BatchSimulator.ts --tracks 3 --racesPerTrack 3 --seed quick-check --maxRaceSeconds 165 --output sim-results.json",
+    "sim:deep": "tsx src/sim/BatchSimulator.ts --tracks 100 --racesPerTrack 20 --seed batch-test --maxRaceSeconds 235 --output sim-results.json",
+    "sim:no-pegboard": "tsx src/sim/BatchSimulator.ts --tracks 6 --racesPerTrack 4 --seed ablate-pegboard --maxRaceSeconds 150 --output sim-no-pegboard.json --disableMachines pegboard",
+    "sim:no-funnel": "tsx src/sim/BatchSimulator.ts --tracks 6 --racesPerTrack 4 --seed ablate-funnel --maxRaceSeconds 150 --output sim-no-funnel.json --disableMachines funnel",
+    "sim:no-spinner": "tsx src/sim/BatchSimulator.ts --tracks 6 --racesPerTrack 4 --seed ablate-spinner --maxRaceSeconds 150 --output sim-no-spinner.json --disableMachines spinner",
+    "sim:no-splitter": "tsx src/sim/BatchSimulator.ts --tracks 6 --racesPerTrack 4 --seed ablate-splitter --maxRaceSeconds 150 --output sim-no-splitter.json --disableMachines splitter",
+    "sim:no-ramp": "tsx src/sim/BatchSimulator.ts --tracks 6 --racesPerTrack 4 --seed ablate-ramp --maxRaceSeconds 150 --output sim-no-ramp.json --disableMachines ramp",
+    "sim:feedback": "tsx src/sim/FeedbackSimulator.ts --tracks 4 --racesPerTrack 3 --iterations 3 --seed feedback-test --maxRaceSeconds 150 --output feedback-results.json"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d": "^0.19.3",
+    "three": "^0.164.1"
+  },
+  "devDependencies": {
+    "@dimforge/rapier3d-compat": "^0.19.3",
+    "@types/node": "^25.6.0",
+    "@types/three": "^0.164.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.6.0"
+  }
+}

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Lords of Chaos</title>
+    <link rel="stylesheet" href="src/styles.css">
+  </head>
+  <body>
+    <main>
+      <section class="title-screen">
+        <h1>The Lords of Chaos</h1>
+        <div class="start-row">
+          <label for="player-name">What is your name?</label>
+          <input id="player-name" value="PLAYER" maxlength="18" autocomplete="off">
+          <button id="start-button" type="button">Start</button>
+          <button id="help-button-title" class="help-button" type="button" aria-label="Open help">?</button>
+        </div>
+      </section>
+
+      <section class="game" hidden>
+        <button id="help-button" class="help-button help-button-game" type="button" aria-label="Open help">?</button>
+        <section class="panel room-panel">
+          <div class="panel-heading">Current Room</div>
+          <div id="room-text" class="room-text"></div>
+        </section>
+
+        <section class="panel objective-panel">
+          <div class="panel-heading">Objective / Danger</div>
+          <div id="objective-status" class="objective-status"></div>
+        </section>
+
+        <section class="panel command-panel">
+          <div class="panel-heading">Movement / Actions</div>
+          <div class="command-grid">
+            <div class="direction-pad" aria-label="Movement controls">
+              <button data-dir="n" type="button" aria-label="Move north">North <span>W</span></button>
+              <button data-dir="w" type="button" aria-label="Move west">West <span>A</span></button>
+              <button data-dir="e" type="button" aria-label="Move east">East <span>D</span></button>
+              <button data-dir="s" type="button" aria-label="Move south">South <span>S</span></button>
+            </div>
+            <div class="action-stack">
+              <button id="action-button" class="action-button" type="button">Wait</button>
+              <button id="guard-button" class="action-button combat-action" type="button" hidden>Guard</button>
+              <button id="flee-button" class="action-button combat-action" type="button" hidden>Flee</button>
+              <button id="use-button" class="action-button secondary-action" type="button" disabled>Use</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel log-panel">
+          <div class="panel-heading">Event Log</div>
+          <section id="messages" class="messages" aria-live="polite"></section>
+        </section>
+
+        <section class="panel map-panel">
+          <div class="panel-heading">Map</div>
+          <canvas id="map"></canvas>
+          <div class="map-legend" aria-label="Map legend">
+            <span><i class="legend-player"></i>Player</span>
+            <span><i class="legend-explored"></i>Explored</span>
+            <span><i class="legend-unexplored"></i>Unexplored</span>
+            <span><i class="legend-enemy"></i>Enemy</span>
+            <span><i class="legend-item"></i>Item</span>
+            <span><i class="legend-objective"></i>Objective</span>
+          </div>
+        </section>
+
+        <section class="panel status-panel">
+          <div class="panel-heading">Player Status</div>
+          <section id="stats" class="stats"></section>
+        </section>
+
+        <section class="panel inventory-panel">
+          <div class="panel-heading">Inventory / Equipment</div>
+          <div class="inventory-wrap">
+            <div>
+              <h2 id="inventory-title">Inventory</h2>
+              <div id="inventory" class="inventory"></div>
+            </div>
+            <div>
+              <h2>Equipment</h2>
+              <div id="equipment" class="equipment"></div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section id="intro-overlay" class="modal-overlay" hidden>
+        <div class="modal-box intro-box" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+          <h2 id="intro-title">The Air Is Unfinished</h2>
+          <p>You wake in a place that should not exist.</p>
+          <p>The air hums with something unfinished.</p>
+          <p>Move with W A S D or the arrows.</p>
+          <p>Find the artifact. Leave this place.</p>
+          <button id="intro-continue" type="button">Continue</button>
+        </div>
+      </section>
+
+      <section id="help-overlay" class="modal-overlay" hidden>
+        <div class="modal-box help-box" role="dialog" aria-modal="true" aria-labelledby="help-title">
+          <button id="help-close" class="modal-close" type="button" aria-label="Close help">Close</button>
+          <h2 id="help-title">Controls</h2>
+          <dl>
+            <dt>W / A / S / D</dt><dd>Move</dd>
+            <dt>Arrow Keys</dt><dd>Move</dd>
+            <dt>Space</dt><dd>Attack or pick up</dd>
+            <dt>G</dt><dd>Guard</dd>
+            <dt>F</dt><dd>Flee</dd>
+          </dl>
+          <h2>Goal</h2>
+          <p>Find the artifact.</p>
+          <p>Then reach the exit.</p>
+        </div>
+      </section>
+
+      <div id="tutorial-toast" class="tutorial-toast" hidden>
+        <button id="tutorial-dismiss" type="button" aria-label="Dismiss tutorial prompt">x</button>
+        <p></p>
+      </div>
+    </main>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>

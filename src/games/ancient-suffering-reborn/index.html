@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ancient Suffering</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section id="main-menu" aria-labelledby="main-menu-title">
+      <div id="main-menu-content">
+        <p class="eyebrow">Retro procedural fantasy</p>
+        <h1 id="main-menu-title">Ancient Suffering</h1>
+        <p id="main-menu-description">
+          Explore a generated world of ruined sanctuaries, cursed relics, class trainers, hazards, and ritual choices. Claim the Ash-Crown, understand its curse, and decide whether you can seal it before the old empire remembers you.
+        </p>
+        <button id="start-game-btn">Start Game</button>
+      </div>
+    </section>
+
+    <div id="game-container">
+      <header id="top-bar">
+        <div>
+          <p class="eyebrow">Ancient Suffering</p>
+          <h1 id="room-heading">Awakening</h1>
+        </div>
+      </header>
+
+      <main id="dashboard">
+        <div class="outer-pane-resizer" id="left-outer-resizer" role="separator" aria-orientation="vertical" aria-label="Resize dashboard from left edge"></div>
+
+        <aside id="location-panel" class="panel">
+          <h2>Location</h2>
+          <p id="current-room-name">Unknown</p>
+        </aside>
+
+        <div class="pane-resizer" id="left-pane-resizer" role="separator" aria-orientation="vertical" aria-label="Resize location pane"></div>
+
+        <section id="narrative-panel" class="panel">
+          <div id="text-log"></div>
+          <div class="control-top-resizer" id="control-top-resizer" role="separator" aria-orientation="horizontal" aria-label="Resize controls"></div>
+          <div id="control-panel">
+            <div class="control-group">
+              <h2>Navigation</h2>
+              <div id="directional-button-container" class="button-grid">
+                <button id="north-btn">North</button>
+                <button id="south-btn">South</button>
+                <button id="east-btn">East</button>
+                <button id="west-btn">West</button>
+              </div>
+              <div id="extra-exit-button-container" class="button-row"></div>
+              <button id="backtrack-btn" disabled>Backtrack</button>
+            </div>
+            <div class="control-resizer" id="nav-scene-resizer" role="separator" aria-orientation="vertical" aria-label="Resize navigation and scene controls"></div>
+            <div class="control-group">
+              <h2>Scene</h2>
+              <div id="action-button-container" class="button-row">
+              <button id="talk-btn" style="display: none">Talk</button>
+              <button id="pick-up-btn" style="display: none">Pick Up</button>
+              </div>
+            </div>
+            <div class="control-resizer" id="scene-character-resizer" role="separator" aria-orientation="vertical" aria-label="Resize scene and character controls"></div>
+            <div class="control-group">
+              <h2>Character</h2>
+              <div id="character-button-container" class="button-row">
+                <button id="class-status-btn">Class Status</button>
+                <button id="status-btn">Status</button>
+                <button id="inventory-btn" style="display: none">Inventory</button>
+              </div>
+            </div>
+            <div class="control-resizer" id="character-system-resizer" role="separator" aria-orientation="vertical" aria-label="Resize character and system controls"></div>
+            <div class="control-group">
+              <h2>System</h2>
+              <div id="system-button-container" class="button-row">
+                <button id="music-btn">Music On</button>
+                <button id="save-btn">Save Game</button>
+                <button id="load-btn">Load Game</button>
+                <button id="new-game-btn">New Game</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="pane-resizer" id="right-pane-resizer" role="separator" aria-orientation="vertical" aria-label="Resize character pane"></div>
+
+        <aside id="character-panel" class="panel">
+          <h2>Character</h2>
+          <dl id="character-stats"></dl>
+          <h2>Inventory</h2>
+          <ul id="inventory-summary"></ul>
+        </aside>
+
+        <div class="outer-pane-resizer" id="right-outer-resizer" role="separator" aria-orientation="vertical" aria-label="Resize dashboard from right edge"></div>
+      </main>
+
+      <div id="overlay-container" style="display: none" class="overlay">
+        <div class="overlay-content">
+          <p id="overlay-message"></p>
+          <button id="yes-btn">Yes</button>
+          <button id="no-btn">No</button>
+        </div>
+      </div>
+      <div id="inventory-modal" style="display:none;" class="overlay">
+        <div class="overlay-content inventory-dialog">
+          <p>Inventory</p>
+          <ul id="inventory-list"></ul>
+          <button id="close-inventory-btn">Close</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

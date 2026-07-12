@@ -1,0 +1,17 @@
+{
+  "name": "01.06-space-surveyor",
+  "version": "1.0.0",
+  "description": "Space Surveyor is a retro-inspired 2D space exploration and combat game. Pilot a survey ship through procedurally generated sectors, dodge gravity wells, deliver survey data, and fight off raiders while your hidden beacon exposure quietly reshapes the universe.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node tools/build.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

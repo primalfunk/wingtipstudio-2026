@@ -1,0 +1,12 @@
+[
+  {
+    "trackSeed": "quick-check_track_001",
+    "disabledMachines": [],
+    "score": 0.867,
+    "machineMix": {
+      "machineSeed": "quick-check_track_001:machines",
+      "slowZoneHits": 3708,
+      "forceZoneHits": 8157
+    }
+  }
+]

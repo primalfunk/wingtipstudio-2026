@@ -1,0 +1,76 @@
+[
+  {
+    "trackSeed": "feedback-test_track_001",
+    "selectedIteration": 1,
+    "accepted": true,
+    "goalMatched": true,
+    "mutation": {
+      "pegDensityMultiplier": 1.14,
+      "slowdownVarianceMultiplier": 1.22,
+      "speedBoostMultiplier": 1.18,
+      "spinnerSpeedMultiplier": 1.1,
+      "spinnerProgressOffset": -1.2
+    },
+    "score": 0.824,
+    "mismatchReasons": [],
+    "mutationNotes": [
+      "increase_slowdown_patch_asymmetry",
+      "increase_speed_boost_asymmetry",
+      "move_paddle_upstream_to_convergence",
+      "increase_peg_density"
+    ]
+  },
+  {
+    "trackSeed": "feedback-test_track_002",
+    "selectedIteration": 0,
+    "accepted": true,
+    "goalMatched": true,
+    "mutation": {},
+    "score": 0.791,
+    "mismatchReasons": [],
+    "mutationNotes": [
+      "increase_slowdown_patch_asymmetry",
+      "increase_speed_boost_asymmetry",
+      "move_paddle_upstream_to_convergence",
+      "increase_peg_density"
+    ]
+  },
+  {
+    "trackSeed": "feedback-test_track_003",
+    "selectedIteration": 1,
+    "accepted": true,
+    "goalMatched": true,
+    "mutation": {
+      "pegDensityMultiplier": 1.14,
+      "slowdownVarianceMultiplier": 1.22,
+      "speedBoostMultiplier": 1.18,
+      "spinnerSpeedMultiplier": 1.1,
+      "spinnerProgressOffset": -1.2
+    },
+    "score": 0.84,
+    "mismatchReasons": [],
+    "mutationNotes": [
+      "increase_slowdown_patch_asymmetry",
+      "increase_speed_boost_asymmetry",
+      "move_paddle_upstream_to_convergence",
+      "increase_peg_density"
+    ]
+  },
+  {
+    "trackSeed": "feedback-test_track_004",
+    "selectedIteration": 0,
+    "accepted": true,
+    "goalMatched": false,
+    "mutation": {},
+    "score": 0.841,
+    "mismatchReasons": [
+      "low_leader_changes"
+    ],
+    "mutationNotes": [
+      "increase_slowdown_patch_asymmetry",
+      "increase_speed_boost_asymmetry",
+      "move_paddle_upstream_to_convergence",
+      "increase_peg_density"
+    ]
+  }
+]

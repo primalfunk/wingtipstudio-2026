@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Streets Arcana</title>
+</head>
+<body class="is-menu">
+  <section class="main-menu" id="main-menu" aria-label="Streets Arcana main menu">
+    <div class="main-menu-content">
+      <h1 class="main-menu-title visually-hidden">
+        <span>Streets</span>
+        <span>Arcana</span>
+      </h1>
+      <button class="start-game-button" id="start-game-button" type="button">Start Game</button>
+    </div>
+  </section>
+
+  <header class="app-header">
+    <h1>Streets Arcana</h1>
+    <details class="app-menu">
+      <summary>Menu</summary>
+      <div class="header-panels">
+      <details id="settings-panel">
+        <summary>Settings</summary>
+        <div class="panel-body">
+          <label>
+            Opponent style:
+            <select id="bot-style">
+            </select>
+          </label>
+          <div id="bot-style-description">Straightforward reg: solid baseline training opponent.</div>
+          <label>
+            Starting stack (BB):
+            <input id="starting-bb" type="number" value="50" min="10" max="200" />
+          </label>
+          <label>
+            Big blind size:
+            <input id="bb-size" type="number" value="20" min="2" step="2" />
+          </label>
+          <label>
+            Card deck:
+            <select id="card-deck"></select>
+          </label>
+          <button id="new-session" type="button">New session</button>
+        </div>
+      </details>
+      <details id="session-panel">
+        <summary>Session summary</summary>
+        <div class="panel-body" id="session-summary">
+          <p>No hands played yet.</p>
+        </div>
+      </details>
+      <details id="drill-panel">
+        <summary>Drills</summary>
+        <div class="panel-body">
+          <label>
+            Drill pack:
+            <select id="drill-pack"></select>
+          </label>
+          <button id="start-drill" type="button">Start drill</button>
+          <button id="drill-show-answer" type="button" hidden>Show answer</button>
+          <button id="exit-drill" type="button" hidden>Return to live play</button>
+          <div id="drill-progress">Drill mode inactive.</div>
+        </div>
+      </details>
+      <details id="glossary-panel">
+        <summary>Glossary</summary>
+        <div class="panel-body" id="glossary-body">
+          <p class="glossary-hint">Hover any <span class="term-example">underlined term</span> in the coach below for a quick definition.</p>
+          <dl id="glossary-list"></dl>
+        </div>
+      </details>
+      </div>
+    </details>
+  </header>
+
+  <main class="game-shell">
+    <section class="table-area">
+      <section class="seat seat-opponent" id="seat-opponent">
+        <div class="seat-info">
+          <div class="seat-avatar" id="opp-avatar">B</div>
+          <div class="seat-meta">
+            <div class="seat-name" id="opp-name">Bot</div>
+            <div class="seat-stack" id="opp-stack">&mdash;</div>
+          </div>
+        </div>
+        <div class="player-stack-rack" id="opp-stack-rack" aria-hidden="true"></div>
+        <div class="hole-cards" id="opp-cards"></div>
+        <div class="seat-commit chip-commit" id="opp-commit"></div>
+        <div class="opponent-action-alert" id="opponent-action-alert" hidden></div>
+      </section>
+
+      <section class="center-area">
+        <div class="board" id="board"></div>
+        <div class="pot-row">
+          <div class="pot-graphic" id="pot-graphic">
+            <div class="pot-chip-stack" id="pot-chip-stack" aria-hidden="true"></div>
+            <div class="pot-label">POT</div>
+            <div class="pot-amount" id="pot-amount">0</div>
+          </div>
+          <div class="street-label" id="street-label">&mdash;</div>
+        </div>
+      </section>
+
+      <section class="seat seat-hero" id="seat-hero">
+        <div class="seat-commit chip-commit" id="hero-commit"></div>
+        <div class="hole-cards" id="hero-cards"></div>
+        <div class="seat-info">
+          <div class="seat-avatar" id="hero-avatar">Y</div>
+          <div class="seat-meta">
+            <div class="seat-name">You</div>
+            <div class="seat-stack" id="hero-stack">&mdash;</div>
+          </div>
+        </div>
+        <div class="player-stack-rack" id="hero-stack-rack" aria-hidden="true"></div>
+      </section>
+      <section class="hand-summary-toast" id="hand-summary-toast" aria-live="polite" hidden>
+        <div class="hand-summary-toast-card">
+          <div class="hand-summary-toast-title">Hand Summary</div>
+          <div class="hand-summary-toast-body" id="hand-summary-toast-body"></div>
+          <button class="hand-summary-toast-dismiss" id="hand-summary-toast-dismiss" type="button">Dismiss</button>
+        </div>
+      </section>
+      <div class="chip-animation-layer" id="chip-animation-layer" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <section class="action-bar" id="action-bar">
+    <button class="action-btn" data-action="fold" type="button">Fold</button>
+    <button class="action-btn" data-action="check-call" type="button">Call</button>
+    <div class="bet-group">
+      <button class="action-btn primary" data-action="bet-raise" type="button">Raise</button>
+      <div class="sizing-row">
+        <button class="sizing-preset" data-size="third" type="button">1/3 pot</button>
+        <button class="sizing-preset" data-size="half" type="button">1/2 pot</button>
+        <button class="sizing-preset" data-size="three-quarter" type="button">3/4 pot</button>
+        <button class="sizing-preset" data-size="pot" type="button">pot</button>
+        <button class="sizing-preset" data-size="allin" type="button">all-in</button>
+        <input id="bet-slider" type="range" min="0" max="100" value="50" />
+        <span id="bet-amount-display">&mdash;</span>
+      </div>
+    </div>
+    <button class="action-btn ghost" id="next-hand-btn" type="button" hidden>Next hand &rarr;</button>
+  </section>
+
+  <details class="coach-area" id="coach-panel" open>
+    <summary class="coach-header">
+      <span class="coach-title">Coaching Advice</span>
+      <span class="coach-hint" id="coach-hint">Decision hint appears here.</span>
+      <div class="coach-context" id="coach-context"></div>
+      <div class="coach-metrics" id="coach-metrics" hidden></div>
+    </summary>
+    <div class="coach-body" id="coach-body">
+      <p>Press <strong>Next hand</strong> or start playing. The coach will walk you through each decision.</p>
+    </div>
+  </details>
+
+  <details class="secondary-panel">
+    <summary>Review</summary>
+    <div class="secondary-panel-body">
+      <details class="hand-summary">
+        <summary>Hand summary</summary>
+        <div class="panel-body" id="hand-summary-body">
+          <p>Play a hand to see the summary here.</p>
+        </div>
+      </details>
+
+      <details class="hand-summary">
+        <summary>Hand history</summary>
+        <div class="panel-body">
+          <div class="history-toolbar">
+            <label>
+              Show:
+              <select id="history-filter">
+                <option value="all">All hands</option>
+                <option value="bookmarked">Bookmarked only</option>
+              </select>
+            </label>
+            <button id="history-clear" type="button" class="ghost">Clear local history</button>
+          </div>
+          <div class="history-layout">
+            <div id="history-list" class="history-list">
+              <p>No saved hands yet.</p>
+            </div>
+            <div id="history-replay" class="history-replay">
+              <p>Select a saved hand to replay it.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="hand-summary">
+        <summary>Recent study</summary>
+        <div class="panel-body" id="recent-study">
+          <p>No saved study records yet.</p>
+        </div>
+      </details>
+
+      <details class="hand-summary">
+        <summary>Progress</summary>
+        <div class="panel-body" id="progress-panel">
+          <p>No progress data yet.</p>
+        </div>
+      </details>
+      </div>
+  </details>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

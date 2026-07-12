@@ -1,0 +1,3489 @@
+{
+  "batchSeed": "ablate-pegboard",
+  "generatedAt": "2026-04-26T22:59:01.434Z",
+  "options": {
+    "tracks": 6,
+    "racesPerTrack": 4,
+    "seed": "ablate-pegboard",
+    "maxRaceSeconds": 150,
+    "output": "sim-no-pegboard.json",
+    "disabledMachines": [
+      "pegboard"
+    ]
+  },
+  "summary": {
+    "testedTracks": 6,
+    "acceptedTracks": 2,
+    "rejectedTracks": 4,
+    "bestScore": 0.883
+  },
+  "tracks": [
+    {
+      "trackSeed": "ablate-pegboard_track_001",
+      "raceSeeds": [
+        "ablate-pegboard_track_001_race_001",
+        "ablate-pegboard_track_001_race_002",
+        "ablate-pegboard_track_001_race_003",
+        "ablate-pegboard_track_001_race_004"
+      ],
+      "accepted": false,
+      "failureReasons": [
+        "max stall time 123.367s exceeded 1.5s",
+        "likely stuck event detected",
+        "3 DNF/forced finish result(s)",
+        "3 timeout race(s)",
+        "anti-stall nudges exceeded limit",
+        "TrackSafetyValidator repaired/removed too much generated geometry"
+      ],
+      "safetyScore": 0,
+      "excitementScore": 0.964,
+      "fairnessScore": 0.309,
+      "overallTrackScore": 0.384,
+      "aggregateMetrics": {
+        "raceCount": 4,
+        "maxStallTime": 123.367,
+        "totalDnfs": 3,
+        "timeoutCount": 3,
+        "likelyStuckEvents": 3,
+        "lowProgressWindows": 4,
+        "antiStallNudges": 6,
+        "validatorRepairs": 11,
+        "validatorRemovals": 0,
+        "averageOvertakes": 398.5,
+        "averageLeaderChanges": 34.5,
+        "averageOrderChanges": 279.75,
+        "averagePositionDelta": 2.563,
+        "averageFinalStretchLeaderChanges": 0,
+        "averageFinishTimeSpread": 93.124,
+        "averageSpearman": 0.072,
+        "averageStepCostMs": 0.141,
+        "winDistribution": {
+          "M07": 2,
+          "M01": 2
+        },
+        "startSlotWinDistribution": {
+          "1": 2,
+          "7": 2
+        },
+        "machineInteractionCounts": {
+          "slowZoneHits": 32233,
+          "forceZoneHits": 24718,
+          "antiStallNudges": 6
+        },
+        "failureHotspots": [
+          {
+            "machineType": "ramp",
+            "obstacleId": "drop-ramp-76--1-0",
+            "segment": 72,
+            "count": 3
+          },
+          {
+            "machineType": "ramp",
+            "obstacleId": "drop-ramp-76--1-2",
+            "segment": 78,
+            "count": 3
+          }
+        ]
+      },
+      "recommendedTuningNotes": [
+        "Open clearance around high-contact machines or add stronger down-track force zones.",
+        "Regenerate or remove the closest machine near the replay failure point.",
+        "Reduce pinball density or widen exits before relying on nudges.",
+        "Relax machine density or move machines away from walls before validation.",
+        "Reduce start-lane bias or increase early splitter/pegboard variance."
+      ],
+      "perRaceMetrics": [
+        {
+          "trackSeed": "ablate-pegboard_track_001",
+          "raceSeed": "ablate-pegboard_track_001_race_001",
+          "machineSeed": "ablate-pegboard_track_001:machines",
+          "finished": false,
+          "results": [
+            {
+              "marbleId": "M07",
+              "place": 1,
+              "finishTime": 25.099999999999856,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 2,
+              "finishTime": 31.917666666666136,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 3,
+              "finishTime": 34.06866666666602,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 4,
+              "finishTime": 34.53633333333266,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 5,
+              "finishTime": 36.23733333333256,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 6,
+              "finishTime": 36.621666666665874,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 7,
+              "finishTime": 39.255999999999055,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 8,
+              "finishTime": 150.00700000001152,
+              "progress": 78.13485926700274,
+              "forced": true
+            }
+          ],
+          "safety": {
+            "maxStallTime": 120.867,
+            "lowProgressWindows": 1,
+            "likelyStuckEvents": 1,
+            "antiStallNudges": 3,
+            "validatorRepairs": 11,
+            "validatorRemovals": 0,
+            "timeoutOccurred": true,
+            "dnfCount": 1
+          },
+          "excitement": {
+            "totalOvertakes": 319,
+            "leaderChanges": 29,
+            "orderChanges": 249,
+            "averagePositionDelta": 3.75,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 10033,
+              "forceZoneHits": 7994,
+              "antiStallNudges": 3
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M07",
+            "winningStartSlot": 7,
+            "finishTimeSpread": 124.907,
+            "startFinishSpearman": -0.714
+          },
+          "performance": {
+            "simDurationMs": 1389.764,
+            "physicsStepCount": 9000,
+            "stepCostMs": 0.154,
+            "fpsEquivalent": 6475.92
+          },
+          "antiStallDiagnostics": [
+            {
+              "marbleId": "M01",
+              "time": 25.167,
+              "frame": 1510,
+              "position": {
+                "x": 6.294,
+                "y": -7.674,
+                "z": 56.955
+              },
+              "velocity": {
+                "x": 0.178,
+                "y": -0.008,
+                "z": 0.049
+              },
+              "nearestMachine": "ramp",
+              "nearestObstacle": "drop-ramp-76--1-0",
+              "currentSegment": 72,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M01",
+              "time": 25.367,
+              "frame": 1522,
+              "position": {
+                "x": 6.333,
+                "y": -7.677,
+                "z": 56.966
+              },
+              "velocity": {
+                "x": 0.194,
+                "y": 0.009,
+                "z": -0.042
+              },
+              "nearestMachine": "ramp",
+              "nearestObstacle": "drop-ramp-76--1-0",
+              "currentSegment": 72,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M04",
+              "time": 30.667,
+              "frame": 1840,
+              "position": {
+                "x": 6.259,
+                "y": -8.796,
+                "z": 63.022
+              },
+              "velocity": {
+                "x": 0.022,
+                "y": 0.013,
+                "z": 0.118
+              },
+              "nearestMachine": "ramp",
+              "nearestObstacle": "drop-ramp-76--1-2",
+              "currentSegment": 78,
+              "recentProgressDelta": 0
+            }
+          ],
+          "replay": {
+            "trackSeed": "ablate-pegboard_track_001",
+            "raceSeed": "ablate-pegboard_track_001_race_001",
+            "machineSeed": "ablate-pegboard_track_001:machines",
+            "failureFrame": 9000,
+            "failureTime": 150,
+            "failureReason": "timeout_or_dnf",
+            "marbleId": "M04",
+            "position": {
+              "x": 6.259,
+              "y": -8.796,
+              "z": 63.022
+            },
+            "nearbyMachineId": null,
+            "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_001&raceSeed=ablate-pegboard_track_001_race_001&machineSeed=ablate-pegboard_track_001%3Amachines&debugFrame=9000"
+          }
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_001",
+          "raceSeed": "ablate-pegboard_track_001_race_002",
+          "machineSeed": "ablate-pegboard_track_001:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M01",
+              "place": 1,
+              "finishTime": 31.649999999999483,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 2,
+              "finishTime": 31.650999999999485,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 3,
+              "finishTime": 31.685333333332814,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 4,
+              "finishTime": 32.00299999999946,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 5,
+              "finishTime": 34.43733333333266,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 6,
+              "finishTime": 34.68833333333265,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 7,
+              "finishTime": 34.72266666666598,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 8,
+              "finishTime": 35.4403333333326,
+              "progress": 114.74818907430458,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0.333,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 11,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 408,
+            "leaderChanges": 47,
+            "orderChanges": 323,
+            "averagePositionDelta": 2,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 2466,
+              "forceZoneHits": 690,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M01",
+            "winningStartSlot": 1,
+            "finishTimeSpread": 3.79,
+            "startFinishSpearman": 0.429
+          },
+          "performance": {
+            "simDurationMs": 298.845,
+            "physicsStepCount": 2126,
+            "stepCostMs": 0.141,
+            "fpsEquivalent": 7114.053
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_001",
+          "raceSeed": "ablate-pegboard_track_001_race_003",
+          "machineSeed": "ablate-pegboard_track_001:machines",
+          "finished": false,
+          "results": [
+            {
+              "marbleId": "M07",
+              "place": 1,
+              "finishTime": 27.03333333333308,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 2,
+              "finishTime": 28.20099999999968,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 3,
+              "finishTime": 31.251999999999505,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 4,
+              "finishTime": 32.91966666666608,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 5,
+              "finishTime": 36.25399999999922,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 6,
+              "finishTime": 36.48833333333255,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 7,
+              "finishTime": 41.48933333333226,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 8,
+              "finishTime": 150.00700000001152,
+              "progress": 78.13485926700274,
+              "forced": true
+            }
+          ],
+          "safety": {
+            "maxStallTime": 121.183,
+            "lowProgressWindows": 2,
+            "likelyStuckEvents": 1,
+            "antiStallNudges": 2,
+            "validatorRepairs": 11,
+            "validatorRemovals": 0,
+            "timeoutOccurred": true,
+            "dnfCount": 1
+          },
+          "excitement": {
+            "totalOvertakes": 553,
+            "leaderChanges": 56,
+            "orderChanges": 351,
+            "averagePositionDelta": 2.5,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 9901,
+              "forceZoneHits": 7941,
+              "antiStallNudges": 2
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M07",
+            "winningStartSlot": 7,
+            "finishTimeSpread": 122.974,
+            "startFinishSpearman": 0.095
+          },
+          "performance": {
+            "simDurationMs": 1197.774,
+            "physicsStepCount": 9000,
+            "stepCostMs": 0.133,
+            "fpsEquivalent": 7513.94
+          },
+          "antiStallDiagnostics": [
+            {
+              "marbleId": "M04",
+              "time": 27.95,
+              "frame": 1677,
+              "position": {
+                "x": 6.423,
+                "y": -7.675,
+                "z": 56.96
+              },
+              "velocity": {
+                "x": -0.017,
+                "y": 0,
+                "z": -0.001
+              },
+              "nearestMachine": "ramp",
+              "nearestObstacle": "drop-ramp-76--1-0",
+              "currentSegment": 72,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M08",
+              "time": 30.35,
+              "frame": 1821,
+              "position": {
+                "x": 6.25,
+                "y": -8.798,
+                "z": 63.034
+              },
+              "velocity": {
+                "x": 0.021,
+                "y": 0.011,
+                "z": 0.119
+              },
+              "nearestMachine": "ramp",
+              "nearestObstacle": "drop-ramp-76--1-2",
+              "currentSegment": 78,
+              "recentProgressDelta": 0
+            }
+          ],
+          "replay": {
+            "trackSeed": "ablate-pegboard_track_001",
+            "raceSeed": "ablate-pegboard_track_001_race_003",
+            "machineSeed": "ablate-pegboard_track_001:machines",
+            "failureFrame": 9000,
+            "failureTime": 150,
+            "failureReason": "timeout_or_dnf",
+            "marbleId": "M08",
+            "position": {
+              "x": 6.259,
+              "y": -8.797,
+              "z": 63.023
+            },
+            "nearbyMachineId": null,
+            "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_001&raceSeed=ablate-pegboard_track_001_race_003&machineSeed=ablate-pegboard_track_001%3Amachines&debugFrame=9000"
+          }
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_001",
+          "raceSeed": "ablate-pegboard_track_001_race_004",
+          "machineSeed": "ablate-pegboard_track_001:machines",
+          "finished": false,
+          "results": [
+            {
+              "marbleId": "M01",
+              "place": 1,
+              "finishTime": 29.183333333332957,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 2,
+              "finishTime": 29.500999999999607,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 3,
+              "finishTime": 31.9353333333328,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 4,
+              "finishTime": 32.519666666666105,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 5,
+              "finishTime": 32.83733333333275,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 6,
+              "finishTime": 39.188333333332395,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 7,
+              "finishTime": 39.55599999999904,
+              "progress": 114.74818907430458,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 8,
+              "finishTime": 150.00700000001152,
+              "progress": 78.13485926700274,
+              "forced": true
+            }
+          ],
+          "safety": {
+            "maxStallTime": 123.367,
+            "lowProgressWindows": 1,
+            "likelyStuckEvents": 1,
+            "antiStallNudges": 1,
+            "validatorRepairs": 11,
+            "validatorRemovals": 0,
+            "timeoutOccurred": true,
+            "dnfCount": 1
+          },
+          "excitement": {
+            "totalOvertakes": 314,
+            "leaderChanges": 6,
+            "orderChanges": 196,
+            "averagePositionDelta": 2,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 9833,
+              "forceZoneHits": 8093,
+              "antiStallNudges": 1
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M01",
+            "winningStartSlot": 1,
+            "finishTimeSpread": 120.824,
+            "startFinishSpearman": 0.476
+          },
+          "performance": {
+            "simDurationMs": 1202.396,
+            "physicsStepCount": 9000,
+            "stepCostMs": 0.134,
+            "fpsEquivalent": 7485.056
+          },
+          "antiStallDiagnostics": [
+            {
+              "marbleId": "M05",
+              "time": 28.167,
+              "frame": 1690,
+              "position": {
+                "x": 6.251,
+                "y": -8.798,
+                "z": 63.032
+              },
+              "velocity": {
+                "x": 0.021,
+                "y": 0.011,
+                "z": 0.119
+              },
+              "nearestMachine": "ramp",
+              "nearestObstacle": "drop-ramp-76--1-2",
+              "currentSegment": 78,
+              "recentProgressDelta": 0
+            }
+          ],
+          "replay": {
+            "trackSeed": "ablate-pegboard_track_001",
+            "raceSeed": "ablate-pegboard_track_001_race_004",
+            "machineSeed": "ablate-pegboard_track_001:machines",
+            "failureFrame": 9000,
+            "failureTime": 150,
+            "failureReason": "timeout_or_dnf",
+            "marbleId": "M05",
+            "position": {
+              "x": 6.258,
+              "y": -8.796,
+              "z": 63.022
+            },
+            "nearbyMachineId": null,
+            "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_001&raceSeed=ablate-pegboard_track_001_race_004&machineSeed=ablate-pegboard_track_001%3Amachines&debugFrame=9000"
+          }
+        }
+      ],
+      "replayFailures": [
+        {
+          "trackSeed": "ablate-pegboard_track_001",
+          "raceSeed": "ablate-pegboard_track_001_race_001",
+          "machineSeed": "ablate-pegboard_track_001:machines",
+          "failureFrame": 9000,
+          "failureTime": 150,
+          "failureReason": "timeout_or_dnf",
+          "marbleId": "M04",
+          "position": {
+            "x": 6.259,
+            "y": -8.796,
+            "z": 63.022
+          },
+          "nearbyMachineId": null,
+          "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_001&raceSeed=ablate-pegboard_track_001_race_001&machineSeed=ablate-pegboard_track_001%3Amachines&debugFrame=9000"
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_001",
+          "raceSeed": "ablate-pegboard_track_001_race_003",
+          "machineSeed": "ablate-pegboard_track_001:machines",
+          "failureFrame": 9000,
+          "failureTime": 150,
+          "failureReason": "timeout_or_dnf",
+          "marbleId": "M08",
+          "position": {
+            "x": 6.259,
+            "y": -8.797,
+            "z": 63.023
+          },
+          "nearbyMachineId": null,
+          "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_001&raceSeed=ablate-pegboard_track_001_race_003&machineSeed=ablate-pegboard_track_001%3Amachines&debugFrame=9000"
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_001",
+          "raceSeed": "ablate-pegboard_track_001_race_004",
+          "machineSeed": "ablate-pegboard_track_001:machines",
+          "failureFrame": 9000,
+          "failureTime": 150,
+          "failureReason": "timeout_or_dnf",
+          "marbleId": "M05",
+          "position": {
+            "x": 6.258,
+            "y": -8.796,
+            "z": 63.022
+          },
+          "nearbyMachineId": null,
+          "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_001&raceSeed=ablate-pegboard_track_001_race_004&machineSeed=ablate-pegboard_track_001%3Amachines&debugFrame=9000"
+        }
+      ]
+    },
+    {
+      "trackSeed": "ablate-pegboard_track_002",
+      "raceSeeds": [
+        "ablate-pegboard_track_002_race_001",
+        "ablate-pegboard_track_002_race_002",
+        "ablate-pegboard_track_002_race_003",
+        "ablate-pegboard_track_002_race_004"
+      ],
+      "accepted": false,
+      "failureReasons": [
+        "max stall time 138.217s exceeded 1.5s",
+        "likely stuck event detected",
+        "1 DNF/forced finish result(s)",
+        "1 timeout race(s)"
+      ],
+      "safetyScore": 0,
+      "excitementScore": 1,
+      "fairnessScore": 0.35,
+      "overallTrackScore": 0.402,
+      "aggregateMetrics": {
+        "raceCount": 4,
+        "maxStallTime": 138.217,
+        "totalDnfs": 1,
+        "timeoutCount": 1,
+        "likelyStuckEvents": 1,
+        "lowProgressWindows": 1,
+        "antiStallNudges": 1,
+        "validatorRepairs": 8,
+        "validatorRemovals": 0,
+        "averageOvertakes": 378.5,
+        "averageLeaderChanges": 39.5,
+        "averageOrderChanges": 271.75,
+        "averagePositionDelta": 3.125,
+        "averageFinalStretchLeaderChanges": 4.25,
+        "averageFinishTimeSpread": 35.449,
+        "averageSpearman": -0.357,
+        "averageStepCostMs": 0.141,
+        "winDistribution": {
+          "M02": 2,
+          "M08": 2
+        },
+        "startSlotWinDistribution": {
+          "2": 2,
+          "8": 2
+        },
+        "machineInteractionCounts": {
+          "slowZoneHits": 15595,
+          "forceZoneHits": 11024,
+          "antiStallNudges": 1
+        },
+        "failureHotspots": [
+          {
+            "machineType": "funnel",
+            "obstacleId": "funnel-bowl-40-4",
+            "segment": 41,
+            "count": 1
+          }
+        ]
+      },
+      "recommendedTuningNotes": [
+        "Open clearance around high-contact machines or add stronger down-track force zones.",
+        "Regenerate or remove the closest machine near the replay failure point.",
+        "Reduce start-lane bias or increase early splitter/pegboard variance."
+      ],
+      "perRaceMetrics": [
+        {
+          "trackSeed": "ablate-pegboard_track_002",
+          "raceSeed": "ablate-pegboard_track_002_race_001",
+          "machineSeed": "ablate-pegboard_track_002:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M02",
+              "place": 1,
+              "finishTime": 26.083333333333133,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 2,
+              "finishTime": 26.53433333333311,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 3,
+              "finishTime": 28.185333333333013,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 4,
+              "finishTime": 28.20299999999968,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 5,
+              "finishTime": 29.320666666666284,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 6,
+              "finishTime": 30.80499999999953,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 7,
+              "finishTime": 30.905999999999526,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 8,
+              "finishTime": 31.9903333333328,
+              "progress": 116.31510847679813,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 8,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 340,
+            "leaderChanges": 33,
+            "orderChanges": 246,
+            "averagePositionDelta": 3.25,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 1668,
+              "forceZoneHits": 674,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M02",
+            "winningStartSlot": 2,
+            "finishTimeSpread": 5.907,
+            "startFinishSpearman": -0.333
+          },
+          "performance": {
+            "simDurationMs": 248.691,
+            "physicsStepCount": 1919,
+            "stepCostMs": 0.13,
+            "fpsEquivalent": 7716.406
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_002",
+          "raceSeed": "ablate-pegboard_track_002_race_002",
+          "machineSeed": "ablate-pegboard_track_002:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M08",
+              "place": 1,
+              "finishTime": 26.59999999999977,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 2,
+              "finishTime": 27.61766666666638,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 3,
+              "finishTime": 28.85199999999964,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 4,
+              "finishTime": 29.45299999999961,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 5,
+              "finishTime": 29.80399999999959,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 6,
+              "finishTime": 30.80499999999953,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 7,
+              "finishTime": 32.10599999999946,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 8,
+              "finishTime": 33.59033333333271,
+              "progress": 116.31510847679813,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 8,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 433,
+            "leaderChanges": 44,
+            "orderChanges": 325,
+            "averagePositionDelta": 3.25,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 1898,
+              "forceZoneHits": 672,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M08",
+            "winningStartSlot": 8,
+            "finishTimeSpread": 6.99,
+            "startFinishSpearman": -0.357
+          },
+          "performance": {
+            "simDurationMs": 258.944,
+            "physicsStepCount": 2015,
+            "stepCostMs": 0.129,
+            "fpsEquivalent": 7781.596
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_002",
+          "raceSeed": "ablate-pegboard_track_002_race_003",
+          "machineSeed": "ablate-pegboard_track_002:machines",
+          "finished": false,
+          "results": [
+            {
+              "marbleId": "M02",
+              "place": 1,
+              "finishTime": 27.53333333333305,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 2,
+              "finishTime": 28.20099999999968,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 3,
+              "finishTime": 28.868666666666307,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 4,
+              "finishTime": 29.152999999999626,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 5,
+              "finishTime": 30.2373333333329,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 6,
+              "finishTime": 30.738333333332868,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 7,
+              "finishTime": 31.989333333332798,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 8,
+              "finishTime": 150.00700000001152,
+              "progress": 40.99430631625482,
+              "forced": true
+            }
+          ],
+          "safety": {
+            "maxStallTime": 138.217,
+            "lowProgressWindows": 1,
+            "likelyStuckEvents": 1,
+            "antiStallNudges": 1,
+            "validatorRepairs": 8,
+            "validatorRemovals": 0,
+            "timeoutOccurred": true,
+            "dnfCount": 1
+          },
+          "excitement": {
+            "totalOvertakes": 391,
+            "leaderChanges": 51,
+            "orderChanges": 275,
+            "averagePositionDelta": 2.75,
+            "finalStretchLeaderChanges": 16,
+            "machineInteractionCounts": {
+              "slowZoneHits": 9973,
+              "forceZoneHits": 8976,
+              "antiStallNudges": 1
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M02",
+            "winningStartSlot": 2,
+            "finishTimeSpread": 122.474,
+            "startFinishSpearman": -0.048
+          },
+          "performance": {
+            "simDurationMs": 1131.539,
+            "physicsStepCount": 9000,
+            "stepCostMs": 0.126,
+            "fpsEquivalent": 7953.77
+          },
+          "antiStallDiagnostics": [
+            {
+              "marbleId": "M03",
+              "time": 13.267,
+              "frame": 796,
+              "position": {
+                "x": 0.715,
+                "y": -2.453,
+                "z": 28.72
+              },
+              "velocity": {
+                "x": 0.074,
+                "y": 0.01,
+                "z": 0.142
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-40-4",
+              "currentSegment": 41,
+              "recentProgressDelta": 0
+            }
+          ],
+          "replay": {
+            "trackSeed": "ablate-pegboard_track_002",
+            "raceSeed": "ablate-pegboard_track_002_race_003",
+            "machineSeed": "ablate-pegboard_track_002:machines",
+            "failureFrame": 9000,
+            "failureTime": 150,
+            "failureReason": "timeout_or_dnf",
+            "marbleId": "M03",
+            "position": {
+              "x": 0.714,
+              "y": -2.453,
+              "z": 28.721
+            },
+            "nearbyMachineId": null,
+            "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_002&raceSeed=ablate-pegboard_track_002_race_003&machineSeed=ablate-pegboard_track_002%3Amachines&debugFrame=9000"
+          }
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_002",
+          "raceSeed": "ablate-pegboard_track_002_race_004",
+          "machineSeed": "ablate-pegboard_track_002:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M08",
+              "place": 1,
+              "finishTime": 27.433333333333056,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 2,
+              "finishTime": 27.784333333333038,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 3,
+              "finishTime": 29.451999999999607,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 4,
+              "finishTime": 31.636333333332818,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 5,
+              "finishTime": 32.33733333333278,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 6,
+              "finishTime": 32.85499999999942,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 7,
+              "finishTime": 32.85599999999942,
+              "progress": 116.31510847679813,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 8,
+              "finishTime": 33.85699999999936,
+              "progress": 116.31510847679813,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 8,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 350,
+            "leaderChanges": 30,
+            "orderChanges": 241,
+            "averagePositionDelta": 3.25,
+            "finalStretchLeaderChanges": 1,
+            "machineInteractionCounts": {
+              "slowZoneHits": 2056,
+              "forceZoneHits": 702,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M08",
+            "winningStartSlot": 8,
+            "finishTimeSpread": 6.424,
+            "startFinishSpearman": -0.69
+          },
+          "performance": {
+            "simDurationMs": 363.361,
+            "physicsStepCount": 2031,
+            "stepCostMs": 0.179,
+            "fpsEquivalent": 5589.481
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        }
+      ],
+      "replayFailures": [
+        {
+          "trackSeed": "ablate-pegboard_track_002",
+          "raceSeed": "ablate-pegboard_track_002_race_003",
+          "machineSeed": "ablate-pegboard_track_002:machines",
+          "failureFrame": 9000,
+          "failureTime": 150,
+          "failureReason": "timeout_or_dnf",
+          "marbleId": "M03",
+          "position": {
+            "x": 0.714,
+            "y": -2.453,
+            "z": 28.721
+          },
+          "nearbyMachineId": null,
+          "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_002&raceSeed=ablate-pegboard_track_002_race_003&machineSeed=ablate-pegboard_track_002%3Amachines&debugFrame=9000"
+        }
+      ]
+    },
+    {
+      "trackSeed": "ablate-pegboard_track_003",
+      "raceSeeds": [
+        "ablate-pegboard_track_003_race_001",
+        "ablate-pegboard_track_003_race_002",
+        "ablate-pegboard_track_003_race_003",
+        "ablate-pegboard_track_003_race_004"
+      ],
+      "accepted": false,
+      "failureReasons": [
+        "max stall time 137.9s exceeded 1.5s",
+        "likely stuck event detected",
+        "10 DNF/forced finish result(s)",
+        "4 timeout race(s)",
+        "anti-stall nudges exceeded limit",
+        "TrackSafetyValidator repaired/removed too much generated geometry"
+      ],
+      "safetyScore": 0,
+      "excitementScore": 0.917,
+      "fairnessScore": 0.142,
+      "overallTrackScore": 0.342,
+      "aggregateMetrics": {
+        "raceCount": 4,
+        "maxStallTime": 137.9,
+        "totalDnfs": 10,
+        "timeoutCount": 4,
+        "likelyStuckEvents": 10,
+        "lowProgressWindows": 10,
+        "antiStallNudges": 14,
+        "validatorRepairs": 16,
+        "validatorRemovals": 0,
+        "averageOvertakes": 318.25,
+        "averageLeaderChanges": 33.5,
+        "averageOrderChanges": 225.25,
+        "averagePositionDelta": 2,
+        "averageFinalStretchLeaderChanges": 1.25,
+        "averageFinishTimeSpread": 121.036,
+        "averageSpearman": 0.369,
+        "averageStepCostMs": 0.12,
+        "winDistribution": {
+          "M01": 3,
+          "M07": 1
+        },
+        "startSlotWinDistribution": {
+          "1": 3,
+          "7": 1
+        },
+        "machineInteractionCounts": {
+          "slowZoneHits": 56846,
+          "forceZoneHits": 17936,
+          "antiStallNudges": 14
+        },
+        "failureHotspots": [
+          {
+            "machineType": "funnel",
+            "obstacleId": "funnel-bowl-41-1",
+            "segment": 40,
+            "count": 5
+          },
+          {
+            "machineType": "funnel",
+            "obstacleId": "funnel-bowl-41-0",
+            "segment": 39,
+            "count": 3
+          },
+          {
+            "machineType": "funnel",
+            "obstacleId": "funnel-bowl-41-0",
+            "segment": 40,
+            "count": 3
+          },
+          {
+            "machineType": "ramp",
+            "obstacleId": "drop-ramp-80--1-3",
+            "segment": 82,
+            "count": 2
+          },
+          {
+            "machineType": "funnel",
+            "obstacleId": "funnel-bowl-41-0",
+            "segment": 38,
+            "count": 1
+          }
+        ]
+      },
+      "recommendedTuningNotes": [
+        "Open clearance around high-contact machines or add stronger down-track force zones.",
+        "Regenerate or remove the closest machine near the replay failure point.",
+        "Reduce pinball density or widen exits before relying on nudges.",
+        "Relax machine density or move machines away from walls before validation.",
+        "Reduce start-lane bias or increase early splitter/pegboard variance."
+      ],
+      "perRaceMetrics": [
+        {
+          "trackSeed": "ablate-pegboard_track_003",
+          "raceSeed": "ablate-pegboard_track_003_race_001",
+          "machineSeed": "ablate-pegboard_track_003:machines",
+          "finished": false,
+          "results": [
+            {
+              "marbleId": "M01",
+              "place": 1,
+              "finishTime": 25.949999999999807,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 2,
+              "finishTime": 29.71766666666626,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 3,
+              "finishTime": 31.068666666666182,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 4,
+              "finishTime": 33.85299999999936,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 5,
+              "finishTime": 150.0040000000115,
+              "progress": 82.1389248086592,
+              "forced": true
+            },
+            {
+              "marbleId": "M07",
+              "place": 6,
+              "finishTime": 150.0050000000115,
+              "progress": 39.73157558219812,
+              "forced": true
+            },
+            {
+              "marbleId": "M08",
+              "place": 7,
+              "finishTime": 150.0060000000115,
+              "progress": 39.08127827563586,
+              "forced": true
+            },
+            {
+              "marbleId": "M04",
+              "place": 8,
+              "finishTime": 150.00700000001152,
+              "progress": 38.401813368693446,
+              "forced": true
+            }
+          ],
+          "safety": {
+            "maxStallTime": 136.35,
+            "lowProgressWindows": 4,
+            "likelyStuckEvents": 4,
+            "antiStallNudges": 5,
+            "validatorRepairs": 16,
+            "validatorRemovals": 0,
+            "timeoutOccurred": true,
+            "dnfCount": 4
+          },
+          "excitement": {
+            "totalOvertakes": 258,
+            "leaderChanges": 34,
+            "orderChanges": 191,
+            "averagePositionDelta": 1.25,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 17666,
+              "forceZoneHits": 8176,
+              "antiStallNudges": 5
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M01",
+            "winningStartSlot": 1,
+            "finishTimeSpread": 124.057,
+            "startFinishSpearman": 0.667
+          },
+          "performance": {
+            "simDurationMs": 1138.846,
+            "physicsStepCount": 9000,
+            "stepCostMs": 0.127,
+            "fpsEquivalent": 7902.739
+          },
+          "antiStallDiagnostics": [
+            {
+              "marbleId": "M07",
+              "time": 14.017,
+              "frame": 841,
+              "position": {
+                "x": -5.756,
+                "y": -2.151,
+                "z": 27.209
+              },
+              "velocity": {
+                "x": -0.105,
+                "y": -0.008,
+                "z": 0.055
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-41-1",
+              "currentSegment": 40,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M07",
+              "time": 14.85,
+              "frame": 891,
+              "position": {
+                "x": -5.78,
+                "y": -2.152,
+                "z": 27.222
+              },
+              "velocity": {
+                "x": 0.041,
+                "y": 0.019,
+                "z": -0.134
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-41-1",
+              "currentSegment": 40,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M08",
+              "time": 16.5,
+              "frame": 990,
+              "position": {
+                "x": -5.79,
+                "y": -2.029,
+                "z": 26.557
+              },
+              "velocity": {
+                "x": 0,
+                "y": 0,
+                "z": 0.001
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-41-0",
+              "currentSegment": 39,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M04",
+              "time": 16.833,
+              "frame": 1010,
+              "position": {
+                "x": -5.67,
+                "y": -1.904,
+                "z": 25.9
+              },
+              "velocity": {
+                "x": -0.122,
+                "y": -0.001,
+                "z": -0.022
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-41-0",
+              "currentSegment": 38,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M05",
+              "time": 24.65,
+              "frame": 1479,
+              "position": {
+                "x": -6.415,
+                "y": -9.593,
+                "z": 67.267
+              },
+              "velocity": {
+                "x": 0.044,
+                "y": 0.01,
+                "z": 0.121
+              },
+              "nearestMachine": "ramp",
+              "nearestObstacle": "drop-ramp-80--1-3",
+              "currentSegment": 82,
+              "recentProgressDelta": 0
+            }
+          ],
+          "replay": {
+            "trackSeed": "ablate-pegboard_track_003",
+            "raceSeed": "ablate-pegboard_track_003_race_001",
+            "machineSeed": "ablate-pegboard_track_003:machines",
+            "failureFrame": 9000,
+            "failureTime": 150,
+            "failureReason": "timeout_or_dnf",
+            "marbleId": "M04",
+            "position": {
+              "x": -5.708,
+              "y": -1.905,
+              "z": 25.896
+            },
+            "nearbyMachineId": null,
+            "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_003&raceSeed=ablate-pegboard_track_003_race_001&machineSeed=ablate-pegboard_track_003%3Amachines&debugFrame=9000"
+          }
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_003",
+          "raceSeed": "ablate-pegboard_track_003_race_002",
+          "machineSeed": "ablate-pegboard_track_003:machines",
+          "finished": false,
+          "results": [
+            {
+              "marbleId": "M07",
+              "place": 1,
+              "finishTime": 30.06666666666624,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 2,
+              "finishTime": 30.400999999999556,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 3,
+              "finishTime": 30.41866666666622,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 4,
+              "finishTime": 32.33633333333278,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 5,
+              "finishTime": 34.453999999999326,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 6,
+              "finishTime": 40.33833333333233,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 7,
+              "finishTime": 150.0060000000115,
+              "progress": 39.73157558219812,
+              "forced": true
+            },
+            {
+              "marbleId": "M05",
+              "place": 8,
+              "finishTime": 150.00700000001152,
+              "progress": 39.08127827563586,
+              "forced": true
+            }
+          ],
+          "safety": {
+            "maxStallTime": 136.567,
+            "lowProgressWindows": 2,
+            "likelyStuckEvents": 2,
+            "antiStallNudges": 5,
+            "validatorRepairs": 16,
+            "validatorRemovals": 0,
+            "timeoutOccurred": true,
+            "dnfCount": 2
+          },
+          "excitement": {
+            "totalOvertakes": 332,
+            "leaderChanges": 22,
+            "orderChanges": 212,
+            "averagePositionDelta": 3.25,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 10590,
+              "forceZoneHits": 676,
+              "antiStallNudges": 5
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M07",
+            "winningStartSlot": 7,
+            "finishTimeSpread": 119.94,
+            "startFinishSpearman": -0.19
+          },
+          "performance": {
+            "simDurationMs": 1052.054,
+            "physicsStepCount": 9000,
+            "stepCostMs": 0.117,
+            "fpsEquivalent": 8554.692
+          },
+          "antiStallDiagnostics": [
+            {
+              "marbleId": "M02",
+              "time": 11.517,
+              "frame": 691,
+              "position": {
+                "x": -5.781,
+                "y": -2.153,
+                "z": 27.224
+              },
+              "velocity": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-41-1",
+              "currentSegment": 40,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M02",
+              "time": 14.667,
+              "frame": 880,
+              "position": {
+                "x": -5.658,
+                "y": -2.145,
+                "z": 27.175
+              },
+              "velocity": {
+                "x": -0.007,
+                "y": 0.006,
+                "z": -0.032
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-41-0",
+              "currentSegment": 40,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M02",
+              "time": 14.917,
+              "frame": 895,
+              "position": {
+                "x": -5.672,
+                "y": -2.145,
+                "z": 27.171
+              },
+              "velocity": {
+                "x": -0.138,
+                "y": 0.016,
+                "z": -0.113
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-41-0",
+              "currentSegment": 40,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M02",
+              "time": 14.983,
+              "frame": 899,
+              "position": {
+                "x": -5.684,
+                "y": -2.146,
+                "z": 27.181
+              },
+              "velocity": {
+                "x": -0.117,
+                "y": -0.007,
+                "z": -0.11
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-41-0",
+              "currentSegment": 40,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M05",
+              "time": 16.483,
+              "frame": 989,
+              "position": {
+                "x": -5.79,
+                "y": -2.029,
+                "z": 26.556
+              },
+              "velocity": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-41-0",
+              "currentSegment": 39,
+              "recentProgressDelta": 0
+            }
+          ],
+          "replay": {
+            "trackSeed": "ablate-pegboard_track_003",
+            "raceSeed": "ablate-pegboard_track_003_race_002",
+            "machineSeed": "ablate-pegboard_track_003:machines",
+            "failureFrame": 9000,
+            "failureTime": 150,
+            "failureReason": "timeout_or_dnf",
+            "marbleId": "M05",
+            "position": {
+              "x": -5.791,
+              "y": -2.029,
+              "z": 26.558
+            },
+            "nearbyMachineId": null,
+            "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_003&raceSeed=ablate-pegboard_track_003_race_002&machineSeed=ablate-pegboard_track_003%3Amachines&debugFrame=9000"
+          }
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_003",
+          "raceSeed": "ablate-pegboard_track_003_race_003",
+          "machineSeed": "ablate-pegboard_track_003:machines",
+          "finished": false,
+          "results": [
+            {
+              "marbleId": "M01",
+              "place": 1,
+              "finishTime": 32.91666666666608,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 2,
+              "finishTime": 33.90099999999936,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 3,
+              "finishTime": 36.301999999999225,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 4,
+              "finishTime": 36.35299999999922,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 5,
+              "finishTime": 36.68733333333253,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 6,
+              "finishTime": 150.0050000000115,
+              "progress": 82.1389248086592,
+              "forced": true
+            },
+            {
+              "marbleId": "M07",
+              "place": 7,
+              "finishTime": 150.0060000000115,
+              "progress": 39.73157558219812,
+              "forced": true
+            },
+            {
+              "marbleId": "M05",
+              "place": 8,
+              "finishTime": 150.00700000001152,
+              "progress": 39.08127827563586,
+              "forced": true
+            }
+          ],
+          "safety": {
+            "maxStallTime": 137.9,
+            "lowProgressWindows": 3,
+            "likelyStuckEvents": 3,
+            "antiStallNudges": 3,
+            "validatorRepairs": 16,
+            "validatorRemovals": 0,
+            "timeoutOccurred": true,
+            "dnfCount": 3
+          },
+          "excitement": {
+            "totalOvertakes": 276,
+            "leaderChanges": 10,
+            "orderChanges": 198,
+            "averagePositionDelta": 2,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 17957,
+              "forceZoneHits": 8280,
+              "antiStallNudges": 3
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M01",
+            "winningStartSlot": 1,
+            "finishTimeSpread": 117.09,
+            "startFinishSpearman": 0.381
+          },
+          "performance": {
+            "simDurationMs": 1132.723,
+            "physicsStepCount": 9000,
+            "stepCostMs": 0.126,
+            "fpsEquivalent": 7945.453
+          },
+          "antiStallDiagnostics": [
+            {
+              "marbleId": "M07",
+              "time": 13.633,
+              "frame": 818,
+              "position": {
+                "x": -5.781,
+                "y": -2.153,
+                "z": 27.226
+              },
+              "velocity": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-41-1",
+              "currentSegment": 40,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M05",
+              "time": 14.2,
+              "frame": 852,
+              "position": {
+                "x": -5.784,
+                "y": -2.029,
+                "z": 26.555
+              },
+              "velocity": {
+                "x": 0.091,
+                "y": 0.009,
+                "z": -0.058
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-41-0",
+              "currentSegment": 39,
+              "recentProgressDelta": 0
+            },
+            {
+              "marbleId": "M02",
+              "time": 25.433,
+              "frame": 1526,
+              "position": {
+                "x": -6.414,
+                "y": -9.593,
+                "z": 67.267
+              },
+              "velocity": {
+                "x": 0.044,
+                "y": 0.01,
+                "z": 0.121
+              },
+              "nearestMachine": "ramp",
+              "nearestObstacle": "drop-ramp-80--1-3",
+              "currentSegment": 82,
+              "recentProgressDelta": 0
+            }
+          ],
+          "replay": {
+            "trackSeed": "ablate-pegboard_track_003",
+            "raceSeed": "ablate-pegboard_track_003_race_003",
+            "machineSeed": "ablate-pegboard_track_003:machines",
+            "failureFrame": 9000,
+            "failureTime": 150,
+            "failureReason": "timeout_or_dnf",
+            "marbleId": "M05",
+            "position": {
+              "x": -5.791,
+              "y": -2.029,
+              "z": 26.558
+            },
+            "nearbyMachineId": null,
+            "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_003&raceSeed=ablate-pegboard_track_003_race_003&machineSeed=ablate-pegboard_track_003%3Amachines&debugFrame=9000"
+          }
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_003",
+          "raceSeed": "ablate-pegboard_track_003_race_004",
+          "machineSeed": "ablate-pegboard_track_003:machines",
+          "finished": false,
+          "results": [
+            {
+              "marbleId": "M01",
+              "place": 1,
+              "finishTime": 26.94999999999975,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 2,
+              "finishTime": 27.600999999999715,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 3,
+              "finishTime": 28.85199999999964,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 4,
+              "finishTime": 29.819666666666254,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 5,
+              "finishTime": 33.58733333333271,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 6,
+              "finishTime": 33.75499999999937,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 7,
+              "finishTime": 36.15599999999923,
+              "progress": 114.23052547257011,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 8,
+              "finishTime": 150.00700000001152,
+              "progress": 39.73157558219812,
+              "forced": true
+            }
+          ],
+          "safety": {
+            "maxStallTime": 137.733,
+            "lowProgressWindows": 1,
+            "likelyStuckEvents": 1,
+            "antiStallNudges": 1,
+            "validatorRepairs": 16,
+            "validatorRemovals": 0,
+            "timeoutOccurred": true,
+            "dnfCount": 1
+          },
+          "excitement": {
+            "totalOvertakes": 407,
+            "leaderChanges": 68,
+            "orderChanges": 300,
+            "averagePositionDelta": 1.5,
+            "finalStretchLeaderChanges": 5,
+            "machineInteractionCounts": {
+              "slowZoneHits": 10633,
+              "forceZoneHits": 804,
+              "antiStallNudges": 1
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M01",
+            "winningStartSlot": 1,
+            "finishTimeSpread": 123.057,
+            "startFinishSpearman": 0.619
+          },
+          "performance": {
+            "simDurationMs": 987.224,
+            "physicsStepCount": 9000,
+            "stepCostMs": 0.11,
+            "fpsEquivalent": 9116.473
+          },
+          "antiStallDiagnostics": [
+            {
+              "marbleId": "M05",
+              "time": 13.717,
+              "frame": 823,
+              "position": {
+                "x": -5.781,
+                "y": -2.153,
+                "z": 27.226
+              },
+              "velocity": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "nearestMachine": "funnel",
+              "nearestObstacle": "funnel-bowl-41-1",
+              "currentSegment": 40,
+              "recentProgressDelta": 0
+            }
+          ],
+          "replay": {
+            "trackSeed": "ablate-pegboard_track_003",
+            "raceSeed": "ablate-pegboard_track_003_race_004",
+            "machineSeed": "ablate-pegboard_track_003:machines",
+            "failureFrame": 9000,
+            "failureTime": 150,
+            "failureReason": "timeout_or_dnf",
+            "marbleId": "M05",
+            "position": {
+              "x": -5.781,
+              "y": -2.153,
+              "z": 27.226
+            },
+            "nearbyMachineId": null,
+            "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_003&raceSeed=ablate-pegboard_track_003_race_004&machineSeed=ablate-pegboard_track_003%3Amachines&debugFrame=9000"
+          }
+        }
+      ],
+      "replayFailures": [
+        {
+          "trackSeed": "ablate-pegboard_track_003",
+          "raceSeed": "ablate-pegboard_track_003_race_001",
+          "machineSeed": "ablate-pegboard_track_003:machines",
+          "failureFrame": 9000,
+          "failureTime": 150,
+          "failureReason": "timeout_or_dnf",
+          "marbleId": "M04",
+          "position": {
+            "x": -5.708,
+            "y": -1.905,
+            "z": 25.896
+          },
+          "nearbyMachineId": null,
+          "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_003&raceSeed=ablate-pegboard_track_003_race_001&machineSeed=ablate-pegboard_track_003%3Amachines&debugFrame=9000"
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_003",
+          "raceSeed": "ablate-pegboard_track_003_race_002",
+          "machineSeed": "ablate-pegboard_track_003:machines",
+          "failureFrame": 9000,
+          "failureTime": 150,
+          "failureReason": "timeout_or_dnf",
+          "marbleId": "M05",
+          "position": {
+            "x": -5.791,
+            "y": -2.029,
+            "z": 26.558
+          },
+          "nearbyMachineId": null,
+          "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_003&raceSeed=ablate-pegboard_track_003_race_002&machineSeed=ablate-pegboard_track_003%3Amachines&debugFrame=9000"
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_003",
+          "raceSeed": "ablate-pegboard_track_003_race_003",
+          "machineSeed": "ablate-pegboard_track_003:machines",
+          "failureFrame": 9000,
+          "failureTime": 150,
+          "failureReason": "timeout_or_dnf",
+          "marbleId": "M05",
+          "position": {
+            "x": -5.791,
+            "y": -2.029,
+            "z": 26.558
+          },
+          "nearbyMachineId": null,
+          "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_003&raceSeed=ablate-pegboard_track_003_race_003&machineSeed=ablate-pegboard_track_003%3Amachines&debugFrame=9000"
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_003",
+          "raceSeed": "ablate-pegboard_track_003_race_004",
+          "machineSeed": "ablate-pegboard_track_003:machines",
+          "failureFrame": 9000,
+          "failureTime": 150,
+          "failureReason": "timeout_or_dnf",
+          "marbleId": "M05",
+          "position": {
+            "x": -5.781,
+            "y": -2.153,
+            "z": 27.226
+          },
+          "nearbyMachineId": null,
+          "debugUrl": "http://127.0.0.1:5173/?trackSeed=ablate-pegboard_track_003&raceSeed=ablate-pegboard_track_003_race_004&machineSeed=ablate-pegboard_track_003%3Amachines&debugFrame=9000"
+        }
+      ]
+    },
+    {
+      "trackSeed": "ablate-pegboard_track_004",
+      "raceSeeds": [
+        "ablate-pegboard_track_004_race_001",
+        "ablate-pegboard_track_004_race_002",
+        "ablate-pegboard_track_004_race_003",
+        "ablate-pegboard_track_004_race_004"
+      ],
+      "accepted": true,
+      "failureReasons": [],
+      "safetyScore": 0.961,
+      "excitementScore": 1,
+      "fairnessScore": 0.35,
+      "overallTrackScore": 0.883,
+      "aggregateMetrics": {
+        "raceCount": 4,
+        "maxStallTime": 0.233,
+        "totalDnfs": 0,
+        "timeoutCount": 0,
+        "likelyStuckEvents": 0,
+        "lowProgressWindows": 0,
+        "antiStallNudges": 0,
+        "validatorRepairs": 0,
+        "validatorRemovals": 0,
+        "averageOvertakes": 335.25,
+        "averageLeaderChanges": 32.25,
+        "averageOrderChanges": 248.75,
+        "averagePositionDelta": 3.125,
+        "averageFinalStretchLeaderChanges": 0,
+        "averageFinishTimeSpread": 9.836,
+        "averageSpearman": -0.196,
+        "averageStepCostMs": 0.136,
+        "winDistribution": {
+          "M06": 2,
+          "M03": 1,
+          "M05": 1
+        },
+        "startSlotWinDistribution": {
+          "3": 1,
+          "5": 1,
+          "6": 2
+        },
+        "machineInteractionCounts": {
+          "slowZoneHits": 5677,
+          "forceZoneHits": 1720,
+          "antiStallNudges": 0
+        },
+        "failureHotspots": []
+      },
+      "recommendedTuningNotes": [
+        "Reduce start-lane bias or increase early splitter/pegboard variance."
+      ],
+      "perRaceMetrics": [
+        {
+          "trackSeed": "ablate-pegboard_track_004",
+          "raceSeed": "ablate-pegboard_track_004_race_001",
+          "machineSeed": "ablate-pegboard_track_004:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M06",
+              "place": 1,
+              "finishTime": 24.76666666666654,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 2,
+              "finishTime": 30.100999999999573,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 3,
+              "finishTime": 30.318666666666225,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 4,
+              "finishTime": 31.519666666666158,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 5,
+              "finishTime": 32.553999999999434,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 6,
+              "finishTime": 33.00499999999941,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 7,
+              "finishTime": 33.38933333333272,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 8,
+              "finishTime": 41.79033333333224,
+              "progress": 115.00237024053723,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0.233,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 0,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 303,
+            "leaderChanges": 46,
+            "orderChanges": 234,
+            "averagePositionDelta": 3.5,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 1323,
+              "forceZoneHits": 434,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M06",
+            "winningStartSlot": 6,
+            "finishTimeSpread": 17.024,
+            "startFinishSpearman": -0.548
+          },
+          "performance": {
+            "simDurationMs": 325.29,
+            "physicsStepCount": 2507,
+            "stepCostMs": 0.13,
+            "fpsEquivalent": 7706.967
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_004",
+          "raceSeed": "ablate-pegboard_track_004_race_002",
+          "machineSeed": "ablate-pegboard_track_004:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M06",
+              "place": 1,
+              "finishTime": 28.599999999999657,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 2,
+              "finishTime": 30.58433333333288,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 3,
+              "finishTime": 30.785333333332865,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 4,
+              "finishTime": 31.9363333333328,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 5,
+              "finishTime": 32.45399999999944,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 6,
+              "finishTime": 32.78833333333276,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 7,
+              "finishTime": 33.12266666666607,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 8,
+              "finishTime": 37.106999999999175,
+              "progress": 115.00237024053723,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 0,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 390,
+            "leaderChanges": 61,
+            "orderChanges": 291,
+            "averagePositionDelta": 3.75,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 1371,
+              "forceZoneHits": 421,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M06",
+            "winningStartSlot": 6,
+            "finishTimeSpread": 8.507,
+            "startFinishSpearman": -0.571
+          },
+          "performance": {
+            "simDurationMs": 328,
+            "physicsStepCount": 2226,
+            "stepCostMs": 0.147,
+            "fpsEquivalent": 6786.592
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_004",
+          "raceSeed": "ablate-pegboard_track_004_race_003",
+          "machineSeed": "ablate-pegboard_track_004:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M03",
+              "place": 1,
+              "finishTime": 29.699999999999594,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 2,
+              "finishTime": 32.617666666666096,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 3,
+              "finishTime": 33.151999999999404,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 4,
+              "finishTime": 33.55299999999938,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 5,
+              "finishTime": 34.070666666666014,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 6,
+              "finishTime": 34.65499999999932,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 7,
+              "finishTime": 35.57266666666593,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 8,
+              "finishTime": 36.62366666666587,
+              "progress": 115.00237024053723,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 0,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 320,
+            "leaderChanges": 22,
+            "orderChanges": 214,
+            "averagePositionDelta": 2.75,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 1370,
+              "forceZoneHits": 437,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M03",
+            "winningStartSlot": 3,
+            "finishTimeSpread": 6.924,
+            "startFinishSpearman": 0.119
+          },
+          "performance": {
+            "simDurationMs": 296.373,
+            "physicsStepCount": 2197,
+            "stepCostMs": 0.135,
+            "fpsEquivalent": 7412.953
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_004",
+          "raceSeed": "ablate-pegboard_track_004_race_004",
+          "machineSeed": "ablate-pegboard_track_004:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M05",
+              "place": 1,
+              "finishTime": 28.833333333332977,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 2,
+              "finishTime": 31.067666666666184,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 3,
+              "finishTime": 32.135333333332795,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 4,
+              "finishTime": 32.23633333333279,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 5,
+              "finishTime": 33.487333333332714,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 6,
+              "finishTime": 33.68833333333271,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 7,
+              "finishTime": 34.53933333333266,
+              "progress": 115.00237024053723,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 8,
+              "finishTime": 35.72366666666592,
+              "progress": 115.00237024053723,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 0,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 328,
+            "leaderChanges": 0,
+            "orderChanges": 256,
+            "averagePositionDelta": 2.5,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 1613,
+              "forceZoneHits": 428,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M05",
+            "winningStartSlot": 5,
+            "finishTimeSpread": 6.89,
+            "startFinishSpearman": 0.214
+          },
+          "performance": {
+            "simDurationMs": 280.862,
+            "physicsStepCount": 2143,
+            "stepCostMs": 0.131,
+            "fpsEquivalent": 7630.071
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        }
+      ],
+      "replayFailures": []
+    },
+    {
+      "trackSeed": "ablate-pegboard_track_005",
+      "raceSeeds": [
+        "ablate-pegboard_track_005_race_001",
+        "ablate-pegboard_track_005_race_002",
+        "ablate-pegboard_track_005_race_003",
+        "ablate-pegboard_track_005_race_004"
+      ],
+      "accepted": true,
+      "failureReasons": [],
+      "safetyScore": 0.695,
+      "excitementScore": 1,
+      "fairnessScore": 0.35,
+      "overallTrackScore": 0.75,
+      "aggregateMetrics": {
+        "raceCount": 4,
+        "maxStallTime": 0.333,
+        "totalDnfs": 0,
+        "timeoutCount": 0,
+        "likelyStuckEvents": 0,
+        "lowProgressWindows": 0,
+        "antiStallNudges": 0,
+        "validatorRepairs": 10,
+        "validatorRemovals": 0,
+        "averageOvertakes": 328.25,
+        "averageLeaderChanges": 23.5,
+        "averageOrderChanges": 240.75,
+        "averagePositionDelta": 3.438,
+        "averageFinalStretchLeaderChanges": 8.75,
+        "averageFinishTimeSpread": 7.794,
+        "averageSpearman": -0.595,
+        "averageStepCostMs": 0.145,
+        "winDistribution": {
+          "M08": 3,
+          "M04": 1
+        },
+        "startSlotWinDistribution": {
+          "4": 1,
+          "8": 3
+        },
+        "machineInteractionCounts": {
+          "slowZoneHits": 8650,
+          "forceZoneHits": 2968,
+          "antiStallNudges": 0
+        },
+        "failureHotspots": []
+      },
+      "recommendedTuningNotes": [
+        "Reduce start-lane bias or increase early splitter/pegboard variance."
+      ],
+      "perRaceMetrics": [
+        {
+          "trackSeed": "ablate-pegboard_track_005",
+          "raceSeed": "ablate-pegboard_track_005_race_001",
+          "machineSeed": "ablate-pegboard_track_005:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M08",
+              "place": 1,
+              "finishTime": 29.816666666666254,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 2,
+              "finishTime": 30.11766666666624,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 3,
+              "finishTime": 32.05199999999947,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 4,
+              "finishTime": 34.55299999999932,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 5,
+              "finishTime": 35.95399999999924,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 6,
+              "finishTime": 38.07166666666579,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 7,
+              "finishTime": 38.42266666666577,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 8,
+              "finishTime": 41.273666666665605,
+              "progress": 116.90054263386945,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0.117,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 10,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 350,
+            "leaderChanges": 49,
+            "orderChanges": 250,
+            "averagePositionDelta": 3.5,
+            "finalStretchLeaderChanges": 33,
+            "machineInteractionCounts": {
+              "slowZoneHits": 2322,
+              "forceZoneHits": 729,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M08",
+            "winningStartSlot": 8,
+            "finishTimeSpread": 11.457,
+            "startFinishSpearman": -0.619
+          },
+          "performance": {
+            "simDurationMs": 339.679,
+            "physicsStepCount": 2476,
+            "stepCostMs": 0.137,
+            "fpsEquivalent": 7289.241
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_005",
+          "raceSeed": "ablate-pegboard_track_005_race_002",
+          "machineSeed": "ablate-pegboard_track_005:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M08",
+              "place": 1,
+              "finishTime": 32.68333333333276,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 2,
+              "finishTime": 33.61766666666604,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 3,
+              "finishTime": 35.018666666665965,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 4,
+              "finishTime": 35.786333333332585,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 5,
+              "finishTime": 36.80399999999919,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 6,
+              "finishTime": 37.121666666665845,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 7,
+              "finishTime": 37.72266666666581,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 8,
+              "finishTime": 39.50699999999904,
+              "progress": 116.90054263386945,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 10,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 282,
+            "leaderChanges": 11,
+            "orderChanges": 211,
+            "averagePositionDelta": 3.75,
+            "finalStretchLeaderChanges": 2,
+            "machineInteractionCounts": {
+              "slowZoneHits": 1884,
+              "forceZoneHits": 722,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M08",
+            "winningStartSlot": 8,
+            "finishTimeSpread": 6.824,
+            "startFinishSpearman": -0.881
+          },
+          "performance": {
+            "simDurationMs": 335.378,
+            "physicsStepCount": 2370,
+            "stepCostMs": 0.142,
+            "fpsEquivalent": 7066.647
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_005",
+          "raceSeed": "ablate-pegboard_track_005_race_003",
+          "machineSeed": "ablate-pegboard_track_005:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M08",
+              "place": 1,
+              "finishTime": 30.399999999999554,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 2,
+              "finishTime": 34.96766666666596,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 3,
+              "finishTime": 35.051999999999296,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 4,
+              "finishTime": 35.73633333333259,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 5,
+              "finishTime": 35.87066666666591,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 6,
+              "finishTime": 36.90499999999919,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 7,
+              "finishTime": 37.72266666666581,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 8,
+              "finishTime": 38.4069999999991,
+              "progress": 116.90054263386945,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0.333,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 10,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 354,
+            "leaderChanges": 11,
+            "orderChanges": 261,
+            "averagePositionDelta": 3,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 2085,
+              "forceZoneHits": 742,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M08",
+            "winningStartSlot": 8,
+            "finishTimeSpread": 8.007,
+            "startFinishSpearman": -0.571
+          },
+          "performance": {
+            "simDurationMs": 338.782,
+            "physicsStepCount": 2304,
+            "stepCostMs": 0.147,
+            "fpsEquivalent": 6800.828
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_005",
+          "raceSeed": "ablate-pegboard_track_005_race_004",
+          "machineSeed": "ablate-pegboard_track_005:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M04",
+              "place": 1,
+              "finishTime": 32.94999999999941,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 2,
+              "finishTime": 34.75099999999931,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 3,
+              "finishTime": 35.835333333332585,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 4,
+              "finishTime": 36.15299999999923,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 5,
+              "finishTime": 36.48733333333254,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 6,
+              "finishTime": 37.07166666666585,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 7,
+              "finishTime": 37.2893333333325,
+              "progress": 116.90054263386945,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 8,
+              "finishTime": 37.84033333333247,
+              "progress": 116.90054263386945,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 10,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 327,
+            "leaderChanges": 23,
+            "orderChanges": 241,
+            "averagePositionDelta": 3.5,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 2359,
+              "forceZoneHits": 775,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M04",
+            "winningStartSlot": 4,
+            "finishTimeSpread": 4.89,
+            "startFinishSpearman": -0.31
+          },
+          "performance": {
+            "simDurationMs": 347.621,
+            "physicsStepCount": 2270,
+            "stepCostMs": 0.153,
+            "fpsEquivalent": 6530.091
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        }
+      ],
+      "replayFailures": []
+    },
+    {
+      "trackSeed": "ablate-pegboard_track_006",
+      "raceSeeds": [
+        "ablate-pegboard_track_006_race_001",
+        "ablate-pegboard_track_006_race_002",
+        "ablate-pegboard_track_006_race_003",
+        "ablate-pegboard_track_006_race_004"
+      ],
+      "accepted": false,
+      "failureReasons": [
+        "TrackSafetyValidator repaired/removed too much generated geometry"
+      ],
+      "safetyScore": 0.689,
+      "excitementScore": 1,
+      "fairnessScore": 0.35,
+      "overallTrackScore": 0.747,
+      "aggregateMetrics": {
+        "raceCount": 4,
+        "maxStallTime": 0.367,
+        "totalDnfs": 0,
+        "timeoutCount": 0,
+        "likelyStuckEvents": 0,
+        "lowProgressWindows": 0,
+        "antiStallNudges": 0,
+        "validatorRepairs": 16,
+        "validatorRemovals": 0,
+        "averageOvertakes": 321.75,
+        "averageLeaderChanges": 25.75,
+        "averageOrderChanges": 226.75,
+        "averagePositionDelta": 3.563,
+        "averageFinalStretchLeaderChanges": 0,
+        "averageFinishTimeSpread": 7.782,
+        "averageSpearman": -0.661,
+        "averageStepCostMs": 0.132,
+        "winDistribution": {
+          "M08": 2,
+          "M07": 2
+        },
+        "startSlotWinDistribution": {
+          "7": 2,
+          "8": 2
+        },
+        "machineInteractionCounts": {
+          "slowZoneHits": 11474,
+          "forceZoneHits": 3772,
+          "antiStallNudges": 0
+        },
+        "failureHotspots": []
+      },
+      "recommendedTuningNotes": [
+        "Relax machine density or move machines away from walls before validation.",
+        "Reduce start-lane bias or increase early splitter/pegboard variance."
+      ],
+      "perRaceMetrics": [
+        {
+          "trackSeed": "ablate-pegboard_track_006",
+          "raceSeed": "ablate-pegboard_track_006_race_001",
+          "machineSeed": "ablate-pegboard_track_006:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M08",
+              "place": 1,
+              "finishTime": 28.766666666666314,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 2,
+              "finishTime": 29.550999999999604,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 3,
+              "finishTime": 29.968666666666245,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 4,
+              "finishTime": 31.402999999999498,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 5,
+              "finishTime": 33.520666666666045,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 6,
+              "finishTime": 35.43833333333261,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 7,
+              "finishTime": 35.83933333333258,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 8,
+              "finishTime": 38.006999999999124,
+              "progress": 115.02532638831777,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0.367,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 16,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 372,
+            "leaderChanges": 17,
+            "orderChanges": 275,
+            "averagePositionDelta": 3,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 2902,
+              "forceZoneHits": 964,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M08",
+            "winningStartSlot": 8,
+            "finishTimeSpread": 9.24,
+            "startFinishSpearman": -0.357
+          },
+          "performance": {
+            "simDurationMs": 280.65,
+            "physicsStepCount": 2280,
+            "stepCostMs": 0.123,
+            "fpsEquivalent": 8124.009
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_006",
+          "raceSeed": "ablate-pegboard_track_006_race_002",
+          "machineSeed": "ablate-pegboard_track_006:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M07",
+              "place": 1,
+              "finishTime": 28.366666666666337,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 2,
+              "finishTime": 29.6009999999996,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 3,
+              "finishTime": 29.95199999999958,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 4,
+              "finishTime": 30.21966666666623,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 5,
+              "finishTime": 32.08733333333279,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 6,
+              "finishTime": 32.78833333333276,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 7,
+              "finishTime": 33.805999999999365,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 8,
+              "finishTime": 34.40699999999933,
+              "progress": 115.02532638831777,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 16,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 297,
+            "leaderChanges": 43,
+            "orderChanges": 219,
+            "averagePositionDelta": 4,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 3015,
+              "forceZoneHits": 960,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M07",
+            "winningStartSlot": 7,
+            "finishTimeSpread": 6.04,
+            "startFinishSpearman": -0.905
+          },
+          "performance": {
+            "simDurationMs": 271.785,
+            "physicsStepCount": 2064,
+            "stepCostMs": 0.132,
+            "fpsEquivalent": 7594.227
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_006",
+          "raceSeed": "ablate-pegboard_track_006_race_003",
+          "machineSeed": "ablate-pegboard_track_006:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M08",
+              "place": 1,
+              "finishTime": 26.083333333333133,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 2,
+              "finishTime": 28.31766666666634,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M07",
+              "place": 3,
+              "finishTime": 28.985333333332967,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 4,
+              "finishTime": 29.619666666666266,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 5,
+              "finishTime": 30.65399999999954,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 6,
+              "finishTime": 31.438333333332828,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 7,
+              "finishTime": 32.555999999999436,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 8,
+              "finishTime": 34.923666666665966,
+              "progress": 115.02532638831777,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 16,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 250,
+            "leaderChanges": 17,
+            "orderChanges": 146,
+            "averagePositionDelta": 3.5,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 2789,
+              "forceZoneHits": 899,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M08",
+            "winningStartSlot": 8,
+            "finishTimeSpread": 8.84,
+            "startFinishSpearman": -0.667
+          },
+          "performance": {
+            "simDurationMs": 318.579,
+            "physicsStepCount": 2095,
+            "stepCostMs": 0.152,
+            "fpsEquivalent": 6576.067
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        },
+        {
+          "trackSeed": "ablate-pegboard_track_006",
+          "raceSeed": "ablate-pegboard_track_006_race_004",
+          "machineSeed": "ablate-pegboard_track_006:machines",
+          "finished": true,
+          "results": [
+            {
+              "marbleId": "M07",
+              "place": 1,
+              "finishTime": 26.0499999999998,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M08",
+              "place": 2,
+              "finishTime": 29.33433333333295,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M06",
+              "place": 3,
+              "finishTime": 31.70199999999948,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M04",
+              "place": 4,
+              "finishTime": 32.65299999999943,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M02",
+              "place": 5,
+              "finishTime": 32.73733333333276,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M03",
+              "place": 6,
+              "finishTime": 32.78833333333276,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M01",
+              "place": 7,
+              "finishTime": 32.83933333333275,
+              "progress": 115.02532638831777,
+              "forced": false
+            },
+            {
+              "marbleId": "M05",
+              "place": 8,
+              "finishTime": 33.056999999999405,
+              "progress": 115.02532638831777,
+              "forced": false
+            }
+          ],
+          "safety": {
+            "maxStallTime": 0,
+            "lowProgressWindows": 0,
+            "likelyStuckEvents": 0,
+            "antiStallNudges": 0,
+            "validatorRepairs": 16,
+            "validatorRemovals": 0,
+            "timeoutOccurred": false,
+            "dnfCount": 0
+          },
+          "excitement": {
+            "totalOvertakes": 368,
+            "leaderChanges": 26,
+            "orderChanges": 267,
+            "averagePositionDelta": 3.75,
+            "finalStretchLeaderChanges": 0,
+            "machineInteractionCounts": {
+              "slowZoneHits": 2768,
+              "forceZoneHits": 949,
+              "antiStallNudges": 0
+            }
+          },
+          "fairness": {
+            "winningMarbleId": "M07",
+            "winningStartSlot": 7,
+            "finishTimeSpread": 7.007,
+            "startFinishSpearman": -0.714
+          },
+          "performance": {
+            "simDurationMs": 238.125,
+            "physicsStepCount": 1983,
+            "stepCostMs": 0.12,
+            "fpsEquivalent": 8327.559
+          },
+          "antiStallDiagnostics": [],
+          "replay": null
+        }
+      ],
+      "replayFailures": []
+    }
+  ]
+}

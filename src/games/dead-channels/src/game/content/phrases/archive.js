@@ -1,0 +1,40 @@
+import { createPhraseEntries } from '../schema.js';
+
+export const archivePhrases = createPhraseEntries('archive', [
+  { text: 'read the silent witness', difficulty: 1, biome: 'signalArchive' },
+  { text: 'open the buried memory', difficulty: 1, biome: 'signalArchive' },
+  { text: 'scan the amber record', difficulty: 1, biome: 'signalArchive' },
+  { text: 'unlock the old ledger', difficulty: 1, biome: 'deadRelay' },
+  { text: 'recover lost transmission', difficulty: 1, biome: 'deadRelay' },
+  { text: 'read the mirror index', difficulty: 1, biome: 'mirrorConduit' },
+  { text: 'translate the quiet log', difficulty: 2, biome: 'signalArchive' },
+  { text: 'open the forgotten index', difficulty: 2, biome: 'signalArchive' },
+  { text: 'parse the sealed dispatch', difficulty: 2, biome: 'deadRelay' },
+  { text: 'retrieve the lost manifest', difficulty: 2, biome: 'signalArchive' },
+  { text: 'recover old navigation', difficulty: 2, biome: 'deadRelay' },
+  { text: 'scan the silent ledger', difficulty: 2, biome: 'signalArchive' },
+  { text: 'decode the memory thread', difficulty: 2, biome: 'mirrorConduit' },
+  { text: 'open the archive tributary', difficulty: 2, biome: 'coreStream' },
+  { text: 'read the stored weather', difficulty: 2, biome: 'staticBloom' },
+  { text: 'recover the witness tone', difficulty: 2, biome: 'deadRelay' },
+  { text: 'unlock memory protocol', difficulty: 3, biome: 'signalArchive' },
+  { text: 'translate the amber log', difficulty: 3, biome: 'signalArchive' },
+  { text: 'decode the silent beacon', difficulty: 3, biome: 'deadRelay' },
+  { text: 'open mirrored archive seals', difficulty: 3, biome: 'mirrorConduit' },
+  { text: 'read the buried channel', difficulty: 3, biome: 'coreStream' },
+  { text: 'reconstruct the old signal', difficulty: 3, biome: 'staticBloom' },
+  { text: 'parse the extinct carrier', difficulty: 3, biome: 'deadRelay' },
+  { text: 'recover the first checksum', difficulty: 3, biome: 'signalArchive' },
+  { text: 'query the sleeping witness', difficulty: 3, biome: 'mirrorConduit' },
+  { text: 'cross-index extinct messages', difficulty: 4, biome: 'signalArchive' },
+  { text: 'translate pre-relay telemetry', difficulty: 4, biome: 'deadRelay' },
+  { text: 'decode recursive memory seals', difficulty: 4, biome: 'mirrorConduit' },
+  { text: 'restore the archive aperture', difficulty: 4, biome: 'coreStream' },
+  { text: 'read static-preserved evidence', difficulty: 4, biome: 'staticBloom' }
+], {
+  routeType: 'archive',
+  streamRole: 'archive',
+  tags: ['archive', 'lore'],
+  rewardHint: 'fragment',
+  loreGroup: 'runArchive'
+});

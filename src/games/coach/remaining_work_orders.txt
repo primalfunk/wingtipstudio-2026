@@ -1,0 +1,378 @@
+WORK ORDER 009
+Title: Implement Concept and Progress Tracking from Saved Decision History
+Reference Plan: coach/coach_capability_plan.md
+
+Purpose
+Introduce a concept-based progress tracking system that analyzes saved decision history and drill results to identify strengths, weaknesses, and trends in the user’s play.
+
+This allows the coach to move from evaluating individual decisions to understanding how the user performs across strategic concepts over time.
+
+Why This Work Matters
+The application now:
+- classifies spots (WO004)
+- runs drills (WO005)
+- persists decisions and hands (WO006)
+- supports replay and review (WO007)
+- uses structured strategy data (WO008)
+
+However, it still lacks a system to answer:
+- What is the user good at?
+- Where are they struggling?
+- Are they improving?
+
+The plan explicitly calls for tracking performance by concept rather than aggregate agreement. :contentReference[oaicite:0]{index=0}
+
+This work enables:
+- structured progress feedback
+- targeted practice recommendations
+- identification of leaks
+- long-term study value
+
+Scope
+Implement a lightweight concept and progress tracking layer based on saved decision and drill data.
+
+Required Capabilities
+
+1. Concept Definition Layer
+Define a set of trackable concepts.
+
+Initial concepts should map cleanly to existing spot taxonomy and strategy categories.
+
+Recommended initial set:
+- preflop_opening
+- preflop_defending
+- flop_cbet
+- flop_defend_vs_cbet
+- turn_barrel
+- turn_checkback
+- river_bluffcatch
+- river_value_bet
+- bet_sizing
+- bluff_selection
+- overfold_tendency
+- overcall_tendency
+
+Each concept should include:
+- id
+- label
+- description
+- related spotKeys
+
+2. Mapping Decisions to Concepts
+Create logic that maps each saved decision record to one or more concepts.
+
+Mapping inputs:
+- spotKey
+- action taken
+- coach evaluation
+- sizing choice
+
+Example:
+- spotKey = flop_srp_ip_cbet → concept = flop_cbet
+- spotKey = river_bluffcatch_vs_bet → concept = river_bluffcatch
+
+3. Performance Aggregation
+Aggregate decision outcomes by concept.
+
+Track at least:
+- total decisions
+- correct / acceptable / mistake counts
+- mistake rate
+- optional recent trend (last N decisions)
+
+Keep calculations simple and interpretable.
+
+4. Concept Metrics API
+Expose functions such as:
+- getConceptSummary(conceptId)
+- getAllConceptSummaries()
+- getWorstConcepts(limit)
+- getBestConcepts(limit)
+
+Summaries should include:
+- total attempts
+- success rate
+- mistake rate
+- optional trend indicator
+
+5. Basic Progress UI
+Add a minimal UI surface showing concept performance.
+
+At minimum:
+- list of concepts
+- performance indicator (e.g., percentage or label)
+- highlight weak areas
+
+Optional:
+- simple color coding (good / average / needs work)
+
+Do not build a full analytics dashboard.
+
+6. Drill Recommendation Hook (Lightweight)
+Add a simple mechanism to suggest drills based on weak concepts.
+
+Example:
+- if flop_cbet performance is poor → suggest c-bet drills
+
+This can be basic:
+- “You may want to practice: flop c-bet spots”
+
+7. Trend Awareness (Optional, Lightweight)
+If simple to implement, track:
+- recent vs overall performance
+
+Example:
+- last 20 decisions vs lifetime
+
+This should remain lightweight.
+
+8. Debug / Inspection Support
+Provide a developer-visible way to inspect:
+- concept mapping
+- aggregated stats
+
+Suggested:
+- console output or debug panel
+
+Suggested File Targets
+
+New:
+- js/progress/concepts.js
+- js/progress/progress_tracker.js
+
+Optional:
+- js/progress/concept_mapping.js
+
+Modified:
+- history layer (WO006)
+- replay/review UI (WO007)
+- drill system (WO005) for recommendations
+
+Implementation Notes
+
+1. Keep It Simple
+This is not a data science system. Avoid complex statistical models.
+
+2. Use Existing Data
+Leverage saved decision records rather than recomputing context.
+
+3. Concepts Should Be Understandable
+Users should recognize and learn from concept labels.
+
+4. Avoid Overfitting
+Do not create too many granular concepts early.
+
+5. Build for Extension
+Allow future addition of:
+- new concepts
+- more detailed metrics
+- curriculum mapping
+
+Acceptance Criteria
+
+Functional
+1. Decisions are mapped to concepts.
+2. Concept summaries are computed from saved data.
+3. User can view concept performance.
+4. Weak concepts can be identified.
+5. Basic drill suggestions can be generated.
+
+Quality
+6. Metrics are simple and understandable.
+7. System performs efficiently.
+8. Works with partial or limited data.
+9. Easy to extend with new concepts.
+
+Manual Test Cases
+
+Case 1: Concept Mapping
+- Save decisions across different spots.
+- Confirm correct concept assignment.
+
+Case 2: Aggregation
+- Confirm counts and rates are correct.
+
+Case 3: Weak Concept Detection
+- Identify concept with highest mistake rate.
+
+Case 4: UI Display
+- Confirm concept list is readable and useful.
+
+Case 5: Drill Suggestion
+- Confirm weak concept triggers recommendation.
+
+Documentation Requirements
+Document:
+- concept definitions
+- mapping rules
+- aggregation logic
+- limitations
+
+Definition of Done
+This work is complete when the system can analyze saved decisions, group them into concepts, and present clear, actionable progress insights.
+
+Hand-off Notes for Next Work
+This system will support:
+- adaptive drills
+- curriculum design
+- personalized coaching feedback
+
+
+
+WORK ORDER 010
+Title: Implement Opponent Archetypes for Training
+Reference Plan: coach/coach_capability_plan.md
+
+Purpose
+Introduce structured opponent archetypes that shape bot behavior and allow the coach to teach exploitative adjustments against different player types.
+
+Why This Work Matters
+The current bot is primarily heuristic and style-based.
+
+The plan calls for recognizable training villains such as:
+- station
+- nit
+- maniac
+- fit-or-fold
+- straightforward reg
+- tricky reg :contentReference[oaicite:1]{index=1}
+
+These archetypes make training more realistic and improve coaching by enabling:
+- exploit-focused instruction
+- pattern recognition
+- adaptation practice
+
+Scope
+Implement a system for defining, selecting, and applying opponent archetypes.
+
+Required Capabilities
+
+1. Archetype Definitions
+Create structured archetype records.
+
+Each should include:
+- id
+- label
+- description
+- preflop looseness/tightness
+- aggression level
+- bluff frequency bias
+- calling tendency
+- folding tendency
+- c-bet frequency bias
+- raise frequency bias
+
+Example archetypes:
+- station
+- nit
+- maniac
+- fit_or_fold
+- straightforward_reg
+- tricky_reg
+
+2. Bot Behavior Integration
+Modify bot decision logic to incorporate archetype tendencies.
+
+Examples:
+- station → calls more, bluffs less
+- maniac → raises and bluffs more
+- nit → tight ranges, low bluff frequency
+
+Keep adjustments heuristic and interpretable.
+
+3. Range Influence
+Allow archetypes to influence:
+- preflop range width
+- postflop continuation tendencies
+- aggression frequency
+
+This can be implemented as modifiers on existing logic.
+
+4. Coach Integration
+Update coach explanations to reference archetype behavior.
+
+Examples:
+- “This player type tends to overcall”
+- “Against a maniac, bluff-catching becomes more valuable”
+
+5. Archetype Selection UI
+Allow user to select opponent archetype.
+
+Minimal UI:
+- dropdown or selector
+- label and description
+
+6. Default Archetype
+Set a default (e.g., “balanced” or “straightforward_reg”).
+
+7. Debug Visibility
+Expose active archetype and its parameters for tuning.
+
+Suggested File Targets
+
+New:
+- js/bot/archetypes.js
+- js/bot/archetype_profiles.js
+
+Modified:
+- bot logic files
+- coach.js for explanation integration
+- UI for selection
+
+Implementation Notes
+
+1. Keep It Simple
+Avoid overly complex behavior trees.
+
+2. Use Modifiers
+Apply archetype adjustments as multipliers or biases.
+
+3. Maintain Stability
+Ensure bot still produces legal, sensible actions.
+
+4. Coaching First
+Focus on how archetypes improve teaching, not realism.
+
+Acceptance Criteria
+
+Functional
+1. Multiple archetypes exist and are selectable.
+2. Bot behavior changes based on archetype.
+3. Coach references archetype tendencies in explanations.
+
+Quality
+4. Behavior differences are noticeable but stable.
+5. System is easy to extend with new archetypes.
+6. Implementation remains lightweight.
+
+Manual Test Cases
+
+Case 1: Station
+- Confirm high call frequency and low bluffing.
+
+Case 2: Maniac
+- Confirm high aggression and bluffing.
+
+Case 3: Nit
+- Confirm tight play and low aggression.
+
+Case 4: Coach Messaging
+- Confirm explanations reference archetype tendencies.
+
+Case 5: UI Selection
+- Confirm switching archetypes changes behavior.
+
+Documentation Requirements
+Document:
+- archetype definitions
+- behavior modifiers
+- integration points
+
+Definition of Done
+This work is complete when the system supports multiple opponent archetypes that influence bot behavior and are referenced in coaching explanations.
+
+Hand-off Notes
+This enables:
+- exploit-focused drills
+- advanced training scenarios
+- richer coaching dialogue

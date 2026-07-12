@@ -1,0 +1,12 @@
+{
+  "name": "lords-of-chaos-web-build",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.js",
+    "start": "python -m http.server 8080",
+    "smoke": "node src/debug/smoke.js",
+    "sim:combat": "node src/debug/runCombatSimulation.js",
+    "sim:ai": "node src/debug/aiPlayerHarness.js"
+  }
+}

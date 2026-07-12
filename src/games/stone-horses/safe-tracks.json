@@ -1,0 +1,16 @@
+[
+  {
+    "trackSeed": "quick-check_track_001",
+    "score": 0.867,
+    "averageOvertakes": 525.333,
+    "averageLeaderChanges": 67,
+    "maxStallTime": 0.217,
+    "machineMix": {
+      "machineSeed": "quick-check_track_001:machines",
+      "slowZoneHits": 3708,
+      "forceZoneHits": 8157
+    },
+    "estimatedRaceDuration": 53.451,
+    "debugUrl": "http://127.0.0.1:5173/?trackSeed=quick-check_track_001"
+  }
+]

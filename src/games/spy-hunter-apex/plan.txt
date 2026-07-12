@@ -1,0 +1,1537 @@
+IMPLEMENTATION PLAN: Spy Hunter: Apex
+HTML5 / JavaScript / Phaser 3
+
+0. PHASE PLAN
+
+Anticipated phases: 5
+
+Current implementation status:
+- Phase 1 complete: project skeleton, scene flow, placeholder assets, scrolling road, player movement, HUD.
+- Phase 2 complete at MVP level: civilian traffic, collision damage, game over, hostile vehicles, player shooting, scoring, and support van pickup.
+- Phase 3 complete at MVP level: roadside signs, authored segment templates, and segment-driven spawn variation are implemented. Radio/command reception gameplay has been removed because it interfered with the arcade driving loop.
+- Phase 4 retired: command spoofing, radio trust, false command consequences, and the radio UI were removed from active implementation. Support decoys and player support-behavior counters remain as direct vehicle/gameplay systems.
+- Phase 5 in progress: F1 debug overlay, localStorage run records, title/debrief record display, lightweight synthesized audio cues, persisted audio toggle, alert timing cleanup, reusable AI driver, and browser AI test harness are implemented.
+- Collision diagnostics added: open with ?collisionTest=1 to force traffic, enemy, projectile, support, and decoy collision checks. Sprite/body hitboxes were recentered after diagnosing offset issues.
+- NPC vehicle tint palette added: nine strong non-white tints for civilian stand-ins, with role-specific tint subsets for enemies, support, and decoys.
+- Title-screen attract mode added: TitleScene now runs a muted AI-controlled gameplay scene underneath the menu, reusing the same AiDriver and real gameplay systems.
+- Player bounds fix: removed stale manual Arcade body-position rewrites that could desync the car sprite/body after scaled hitbox changes; added defensive coordinate reset.
+- Manual-control startup fix: BriefingScene now explicitly stops attract mode and starts GameScene with aiControlled false; GameScene also normalizes scene config defaults.
+- Control/collision fix: player movement now uses direct normalized velocity for immediate WASD/arrow response, and player-vs-traffic/enemy contacts use high-bounce Arcade colliders instead of overlap/despawn.
+- Input hardening: GameScene now captures WASD/arrow raw keydown/keyup state in addition to Phaser key polling, and no longer forces Arcade body resync every frame after movement.
+- Collision reliability pass: enlarged player/NPC/projectile hitboxes, lowered bullet speed slightly, and added visual-bounds projectile hit fallback for enemies, support, and civilian traffic.
+- Explosion effects added: uploaded explosions_sheet.png moved to src/assets/source, sliced into small/medium/large explosion and smoke-linger spritesheets under src/assets/effects, and wired into vehicle destruction events.
+- Support truck art added: uploaded support truck art moved to src/assets/source, sliced into closed/open support truck sprites under src/assets/vehicles, and wired support trucks to open briefly during pickup.
+- Support dock animation added: rear contact with a support truck now locks control, aligns the player, opens the truck, hides/crops the player as it enters the rear compartment, performs a short repair or ammo service, rolls the player back out, restores control, and sends the truck offscreen.
+- Explosion timing pass: explosion animations now run faster and the smoke/debris linger sheet has been recropped lower to remove source-sheet digits from the top of the overlay frames.
+- Collision reliability fallback added: player-to-traffic, player-to-enemy, support docking, and projectile hits now use visual-bounds checks in addition to Arcade Physics callbacks so scaled sprites do not miss contacts unpredictably.
+- Support truck collision hardening: docking now disables player collision response during the entry/exit tween, serviced/receding trucks ignore projectile hits, and rear-docking validation requires a tighter centered front-to-back contact.
+- Support truck door-state pass: the open-back sprite is now used only during player entry and exit; the closed-back sprite is restored while repair/ammo service is happening and while the truck recedes.
+- Enemy sprite expansion started: uploaded 13_enemy_types.png moved to src/assets/source, sliced into 10 car and 3 motorcycle enemy sprites under src/assets/enemies, preloaded with stable texture keys, and documented in src/data/enemyTypes.js with identities such as mine layer, missile launcher, signal jammer, command car, scout bike, and rocket bike.
+- Enemy roster wired into spawning: CombatSystem now cycles through the 13 enemy types, EnemyVehicle uses per-type textures/sizes/roles/scores, enemy kills show green floating positive score numbers, and civilian vehicle destruction shows red floating penalty numbers.
+- Road surface diversity added: road segments now carry surface profiles that alter asphalt/background/shoulder/marker colors and scrolling wear/accent marks for open highway, watched commuter route, hostile thin-traffic route, and support corridor.
+- Campaign structure added: OverworldScene provides a node-based World 1 map, localStorage campaign progression, fixed-length mission nodes, mission briefing/debrief routing, node completion unlocks, and mission-specific road segment playlists. World 1 now uses nine areas arranged as a 3x3 operational grid with one linear path from area 1 through area 9.
+- Vehicle mode transition MVP added: PlayerCar now supports car/boat modes with separate sizing and movement tuning; the World 1 river mission switches car->boat and boat->car mid-level with a short arcade transition flash.
+- Water asset ingestion and spawn pools added: enemy boats (attack skiff, command boat, rocket hydrofoil, gunboat, mine boat, rammer boat), civilian boats (cargo skiff, fisher, fuel barge, patrol tender), water obstacles (wood, red/green buoys), and civilian motorcycle variants (blue/green/red/white bikes) were moved into src/assets and preloaded. TrafficSystem and CombatSystem now switch between road and water pools based on player vehicle mode; support trucks pause while in boat mode. Mine boat is data-ready for mine dropping, but no standalone mine sprite was present in the uploaded root assets.
+- Enemy behavior pass added: enemy type data now drives front/side spawns, drift/lane-hold/side-merge/escape/mine-layer movement styles, shooter/rocket/cannon/mine weapon styles, enemy projectile damage, shooter/mine-layer spawn caps, and scout/jammer escape awareness events. Rear enemy spawns were removed from the design.
+- Road-exit destruction added: road vehicles shoved halfway off the road are forced to continue sliding outward and explode when fully outside the road bounds.
+- Collision tightening pass added: player, civilian, enemy, boat, motorcycle, and support-truck body widths were narrowed for stricter side contacts; manual player-contact fallback now uses Arcade body bounds instead of rendered sprite bounds.
+- Support-truck avoidance added: active repair/ammo trucks now steer toward adjacent open lanes when traffic/enemies/support vehicles are near, and support-vs-traffic/enemy colliders add a physical avoidance backstop before docking.
+- Enemy projectile speed model fixed: mines now move with road scroll speed so they fall back from the dropper as the player passes; enemy bullets, cannon shots, and rockets move faster than the scrolling road toward the player and have their velocity refreshed each update.
+- Asset source sheet moved to src/assets/source/ and sliced vehicle sprites live in src/assets/vehicles/.
+- Road Expansion R6 MVP implemented: divided highway / median split system now supports smooth transitions between unified four-lane roads and separated two-lane carriageways, generated lane anchors, median rendering/collision, median insta-kill hazards, player-side/opposite-side spawn targets, and lightweight opposite-roadway atmospheric civilian traffic.
+- Median hazard rule planned: medians are hard terrain and should have an insta-kill effect on vehicles. Any civilian, enemy, support, or player vehicle that fully enters the median hazard zone should be destroyed immediately unless a future explicit crossover/ramp mechanic authorizes that crossing.
+- Current focus: roadway architecture / infrastructure expansion. The road itself should become Spy Hunter: Apex's main spectacle system through stronger road assets, infrastructure setpieces, world-specific roadside identity, and readable environmental motion.
+- Art direction artifact added: docs/roadway-architecture-art-plan.md defines the roadway architecture art direction, asset categories, production priorities, and initial implementation candidates.
+- Asset directory structure added for upcoming environment production: roads, transitions, medians, infrastructure, industrial, bridges, tunnels, waterways, worldmap, lighting, and fx.
+- Support vehicle refinement added: support trucks now resolve into two readable service types. Repair trucks restore player health to full, ammo trucks restore ammunition to the capped maximum of 40, HUD ammo displays current/max, and support service time is now a short arcade interaction instead of a long combined repair/upgrades stop.
+- Life-loss audio added: `lost_life.mp3` plays when player damage crosses a full life threshold without ending the run, and `game_over.mp3` plays when the player loses all lives and the death/explosion sequence begins.
+- Player vehicle lifecycle pass started: player now has 3 lives, explicit car/motorcycle/boat mode data, car health/ammo at 6 HP and 40 ammo, motorcycle health/ammo at 1 HP and 20 ammo, car destruction falls back into a flashing invincible white motorcycle, motorcycle destruction costs a life and respawns the car if lives remain, and 0 lives triggers the game-over sequence.
+- Support system expanded to three readable services: repair restores current vehicle health, ammo restores current vehicle ammo, and upgrade appears while in motorcycle mode to restore the player to the car.
+- Enemy durability and fairness pass started: enemy projectiles now reduce enemy health instead of one-shotting all enemies, motorcycles are fragile, heavier enemies survive more hits, non-motorcycle enemy speed/lateral movement is clamped against current player mobility, and white motorcycle art is reserved for the player.
+- Difficulty tuning harness updated: harness runs now accept a `difficulty` URL parameter, record difficulty/mission/survival/life-loss/fallback/upgrade/collision metrics, and display survival summaries for comparing easy, medium, and hard. First-pass difficulty presets now scale player health, damage intake, enemy speed, aggression, and spawn frequency.
+- Difficulty tuning pass 2 complete: Playwright-based harness automation is installed and working. Easy now lowers traffic and combat pressure enough to keep 1-1 survivable without fallback in short/spot checks; medium produces recoverable car->bike->upgrade loops; hard produces higher combat volume, more fallbacks, and higher kill/collision pressure. Upgrade trucks are now prioritized while the player is on the motorcycle and requested shortly after car destruction.
+
+Phase 1 - Playable Foundation
+Work orders covered:
+- Work Order 1: Project Skeleton
+- Work Order 2: Road and Player Movement
+
+Goal:
+Create a running Phaser prototype with scene flow, placeholder assets, a scrolling road,
+responsive player movement, bounds, keyboard input, and a minimal HUD.
+
+Phase 2 - Arcade Combat Core
+Work orders covered:
+- Work Order 3: Traffic and Collision
+- Work Order 4: Enemy Vehicles and Shooting
+- Work Order 5: Support Van
+
+Goal:
+Make the visible driving game work: traffic, collisions, damage, hostile vehicles,
+shooting, scoring, game over, and readable support pickup.
+
+Phase 3 - Signals and Authored Road Variation
+Work orders covered:
+- Work Order 6: Signal System
+- Work Order 7: Road Segment Tags
+
+Goal:
+Add radio/sign messaging, event history, authored segment templates, and data-driven
+spawn variation without deception yet dominating the run.
+
+Phase 4 - Deception and Adaptation
+Work orders covered:
+- Work Order 8: Trust and Deception MVP
+- Work Order 9: Player Belief Model
+- Work Order 10: Debrief Scene
+
+Goal:
+Introduce fair false signals, decoy support, delayed consequences, habit tracking,
+adaptive pressure, and a debrief that hints at what happened.
+
+Phase 5 - Prototype Polish
+Work orders covered:
+- Work Order 11: Polish Pass
+- Debug tools, save/settings, audio, tuning, and presentation cleanup
+
+Goal:
+Turn the systems into a coherent replayable prototype with readable art, audio tells,
+stable difficulty, useful debug visibility, and persisted player-facing records.
+
+Phase R6 - Road Expansion: Divided Highway / Median Split System
+Work orders covered:
+- Work Order 12: Divided Highway / Median Split System
+
+Goal:
+Expand the road model from one unified four-lane surface into a layout system capable
+of smoothly transitioning into separated two-lane carriageways with a central median,
+without changing the core one-way arcade driving model.
+
+Required foundation:
+- RoadLayout object with unified and divided layouts.
+- LaneAnchorGenerator that replaces static lane positions.
+- Divided entry, divided highway, and divided exit segment types.
+- Smooth widening/merging over several seconds, not abrupt snapping.
+- MedianRenderer for grass, guardrail, concrete divider, shrubs, signs, and utility details.
+- Clean continuous median collision strips.
+- Spawn support for player_side, opposite_side, and both carriageway targets.
+- At least three divided-road visual variants.
+
+Median gameplay rule:
+- The median is not a shoulder and not a passable route.
+- Player cannot cross the median in the MVP.
+- Civilian, enemy, support, and player vehicles that fully enter the median hazard zone
+  are destroyed immediately.
+- Half-entering the median should commit the vehicle to the hazard, similar to current
+  road-exit destruction, so vehicles do not snag or jitter on the divider edge.
+- Future crossover ramps may override this rule only inside explicit authorized
+  crossover zones.
+
+Phase R7 - Roadway Architecture / Infrastructure Expansion
+Work orders covered:
+- Work Order 13: Master Art Direction + Asset Plan
+
+Goal:
+Make the road network the primary spectacle system. Spy Hunter: Apex should move away
+from generic endless-highway presentation and toward memorable transportation
+architecture: refinery corridors, flood channels, tunnel systems, divided interstates,
+bridge crossings, freight corridors, and fortified checkpoints.
+
+Art direction:
+- Infrastructural, industrial, operational, hostile, massive, and mechanical.
+- Retro arcade readability blended with DOS/PS1-era infrastructural realism.
+- Strong silhouettes and repeated infrastructure rhythm.
+- Clean top-down readability over texture noise.
+- Road and roadside systems should always support high-speed vehicle readability.
+
+Asset production structure:
+- docs/roadway-architecture-art-plan.md is the source art-direction document.
+- Environment assets are organized under:
+  - src/assets/roads/
+  - src/assets/transitions/
+  - src/assets/medians/
+  - src/assets/infrastructure/
+  - src/assets/industrial/
+  - src/assets/bridges/
+  - src/assets/tunnels/
+  - src/assets/waterways/
+  - src/assets/worldmap/
+  - src/assets/lighting/
+  - src/assets/fx/
+
+Implementation priorities:
+1. Core road expansion: divided highways, medians, barriers, transition markings,
+   lane merges, shoulder detail, and roadside infrastructure.
+2. Major setpieces: bridges, tunnels, industrial corridors, cloverleaf/interchange
+   silhouettes, flood channels, and checkpoint gates.
+3. World specialization: domestic interstate, industrial corridor, coastal operations,
+   mountain transit, and black-sector military infrastructure.
+4. Atmosphere and polish: bridge shadows, tunnel light pulses, warning lamps,
+   water shimmer, sodium vapor glow, and floodlight sweeps.
+
+Technical target:
+- Keep the current RoadSystem layout logic.
+- Add art profiles and modular prop pools by segment/world theme.
+- Build a RoadsideDetailSystem for scrolling utility poles, barriers, signs, fencing,
+  vegetation, lighting poles, and drainage elements.
+- Build an OverheadInfrastructureSystem for overpass shadows, sign gantries, bridge
+  shadows, tunnel light strips, and elevated traffic silhouettes.
+- Add new segment ids for industrial corridor, bridge crossing, tunnel run, flood
+  channel, checkpoint gate, and construction diversion.
+
+Initial implementation:
+- RoadsideDetailSystem added with segment-themed scrolling props.
+- OverheadInfrastructureSystem added with gantries, bridge shadows, industrial pipe
+  spans, tunnel bands, and checkpoint floodlight structures.
+- RoadAtmosphereSystem added with low-alpha lighting overlays, edge glows,
+  floodlight sweeps, tunnel darkening, and water shimmer.
+- RoadChoreographySystem added with merge arrows, cone lines, construction
+  barricades, checkpoint lane gates, bridge side rhythm, flood-channel marks,
+  and tunnel lane-light strips.
+- LandmarkSetpieceSystem added with large non-colliding roadside modules for
+  industrial corridors, bridge crossings, tunnel systems, flood channels,
+  checkpoints, construction zones, and divided interstates.
+- WorldEnvironmentSystem added with mission-level environment profiles so World 1
+  missions keep distinct distant geography: domestic interstate, watched grid,
+  support corridor, river access, and fortified border.
+- EnvironmentalMotionSystem added with segment-driven bridge shadow sweeps,
+  tunnel light pulses, industrial sodium glow, checkpoint scan beams, water
+  shimmer/wake marks, construction warning pulses, and low-alpha atmospheric
+  motion that stays below HUD readability.
+- Traffic environment identity added: civilian pools now respond to current
+  segment/environment profile, adding placeholder freight trucks, tankers,
+  utility/service vehicles, construction vehicles, inspection vans, and
+  surveillance sedans with distinct tint, size, score penalty, and speed.
+- MissionEndSetpieceSystem added with visible checkpoint, port, fortress, and
+  extraction structures that appear near mission completion and make fixed-length
+  levels resolve through roadway infrastructure instead of an abrupt timer cutoff.
+- Overworld environment support added: map routes and nodes now use mission
+  environment profiles for route color, node iconography, infrastructure ticks,
+  active route pulses, info-panel sector labels, and deployment sector text.
+- Cloverleaf/interchange setpiece added: `cloverleaf_interchange` is now a live
+  road segment with ramp-loop landmarks, overpass shadows, support columns,
+  signage stacks, interchange choreography markers, and motion sweeps.
+- First generated bitmap roadway infrastructure atlas produced, chroma-key
+  removed, sliced, and added under bridges, infrastructure, industrial, medians,
+  tunnels, and waterways. PreloadScene loads the first batch, and
+  LandmarkSetpieceSystem now prefers bitmap assets for matching landmark kinds
+  with procedural fallbacks. See docs/asset-production-log.md.
+- First generated road civilian vehicle atlas produced, chroma-key removed,
+  sliced, and wired. Environment-specific traffic pools now use dedicated
+  freight truck, tanker truck, box hauler, utility van, service pickup,
+  maintenance truck, work crew car, inspection van, border transport, and
+  surveillance sedan sprites instead of tinted car placeholders.
+- First generated road surface texture atlas produced, chroma-key removed,
+  sliced, and wired. RoadSystem now scrolls bitmap tile overlays for clean
+  asphalt, cracked asphalt, industrial grime, bridge concrete, tunnel pavement,
+  and flood-channel pavement while retaining procedural base colors/markers for
+  readability.
+- First generated roadside detail props atlas produced, chroma-key removed,
+  sliced, and wired. RoadsideDetailSystem now uses bitmap utility poles, light
+  poles, signs, barriers, warning lamps, cone stacks, reflective marker posts,
+  waterway posts, dock posts, utility boxes, pipe markers, tunnel wall lights,
+  shrubs, and work arrow boards with procedural fallbacks.
+- First generated road transition/choreography atlas produced, chroma-key
+  removed, sliced, and wired. RoadChoreographySystem now uses bitmap divided
+  entry/exit chevrons, lane merge/split arrows, shoulder closure hatches,
+  construction diversion arrows, median noses, guardrail tapers, temporary
+  barrier diagonals, bridge reflector strips, tunnel lane lights, and
+  flood-channel edge hazard stripes with procedural fallbacks.
+- Infrastructure gameplay pressure pass added: construction, tunnel, bridge,
+  and checkpoint segments now spawn scrolling lane obstructions. Traffic,
+  enemy, and support spawns avoid structurally closed lanes; the player takes
+  obstruction impact damage and bounce; civilian, enemy, and support vehicles
+  that strike hard infrastructure are destroyed with terrain explosions.
+- Roadway gameplay tuning pass started: infrastructure obstructions now have
+  wider spacing, visual lead-in arrows, collision activation only after entering
+  the playfield, dynamic spawn avoidance for lanes with upcoming blockers, and
+  center-lane escape protection so compression segments preserve a readable
+  route through construction, tunnel, and checkpoint pressure. Construction,
+  tunnel, bridge, and checkpoint spawn profiles were reduced slightly to keep
+  chokepoints fair at speed.
+- Authored roadway pacing pass started: MissionPacingDirector now supports
+  opening, build, pressure, release, setpiece, recovery, and finale phases.
+  Active pacing phases multiply segment spawn profiles, can force immediate
+  traffic/enemy/support pressure, log phase transitions, and appear in the
+  debug overlay. World 1 missions now have explicit pacing timelines so each
+  level has a composed roadway rhythm instead of relying only on segment order.
+- Traffic AI and flow choreography pass started: TrafficFlowDirector now selects
+  open flow, commuter flow, freight flow, compressed flow, surge flow, open
+  channel, or cargo channel based on mission phase, segment tags, and vehicle
+  mode. Traffic can spawn as staggered grouped waves or freight-style convoys,
+  and flow states control density, spacing, speed, lane bias, and large-vehicle
+  preference. Civilian vehicles now have commuter, aggressive, cautious,
+  freight, and service personalities that affect speed, lane commitment, and
+  gradual lane drift. Debug overlay now shows current traffic flow.
+- Vehicle combat personality pass started: EnemyBehaviorDirector now selects
+  encounter identities such as pursuit encounter, compression encounter, fire
+  corridor, heavy convoy, hazard field, and patrol swarm from mission phase,
+  road tags, and vehicle mode. Enemy spawns now favor encounter-specific
+  compositions, assign behavior roles, and expose the active encounter in the
+  debug overlay.
+- Enemy motion profiles added: pursuit, rammer, scout, shooter, heavy, mine
+  layer, and support-hunter roles now have different lane commitment,
+  aggression burst timing, lateral movement, speed scaling, and firing cadence.
+  Rammers charge in bursts, scouts weave, shooters lock lanes, mine layers
+  reshape lane space, and heavy sedans advance with less twitch.
+- New architecture segments added and placed into World 1 mission playlists:
+  industrial_corridor, bridge_crossing, cloverleaf_interchange, tunnel_run,
+  flood_channel, checkpoint_gate, construction_diversion.
+
+1. PROJECT GOAL
+
+Build a retro top-down highway combat game inspired by the structure of classic Spy Hunter, but with a hidden counterintelligence layer.
+
+The visible game is fast arcade driving:
+- dodge traffic
+- destroy enemy vehicles
+- manage damage/fuel/ammo
+- collect support from vans
+- survive highway segments
+
+The deeper game is information warfare:
+- commands may be spoofed
+- support may be bait
+- roads may be compromised
+- civilians may signal warnings
+- enemies adapt to the player’s habits
+- the player must learn what to trust through play
+
+The game should look and feel relatively simple, even old-school. The sophistication should come from systemic behavior, not visual spectacle.
+
+Core fantasy:
+The player is not just a driver. They are an operative surviving a hostile information environment at 140 mph.
+
+2. TECHNOLOGY
+
+Use:
+- HTML5
+- JavaScript
+- Phaser 3
+- Vite or equivalent lightweight dev server
+- Arcade Physics
+- simple sprite/tile assets first
+- localStorage for persistent options / discovered hints later
+
+Do not use:
+- complex 3D
+- realistic car physics
+- heavy simulation libraries
+- large framework overhead
+- premature procedural generation
+
+3. HIGH-LEVEL ARCHITECTURE
+
+Recommended structure:
+
+src/
+  main.js
+
+  scenes/
+    BootScene.js
+    PreloadScene.js
+    TitleScene.js
+    BriefingScene.js
+    GameScene.js
+    DebriefScene.js
+    GameOverScene.js
+
+  entities/
+    PlayerCar.js
+    Vehicle.js
+    CivilianVehicle.js
+    EnemyVehicle.js
+    SupportVan.js
+    DecoyVan.js
+    RoadSign.js
+    Projectile.js
+    Hazard.js
+
+  systems/
+    MissionState.js
+    RoadSystem.js
+    TrafficSystem.js
+    SpawnDirector.js
+    CombatSystem.js
+    SignalSystem.js
+    TrustSystem.js
+    DeceptionDirector.js
+    PlayerBeliefModel.js
+    ConsequenceSystem.js
+    ScoringSystem.js
+    AudioSystem.js
+
+  ui/
+    Hud.js
+    RadioPanel.js
+    AlertTicker.js
+    DamageDisplay.js
+    DebriefPanel.js
+
+  data/
+    vehicleTypes.js
+    roadSegments.js
+    signalTemplates.js
+    deceptionRules.js
+    missionProfiles.js
+    tuning.js
+
+4. DESIGN PRINCIPLES
+
+4.1 Keep the surface game readable
+
+The player must always understand:
+- where their car is
+- what lane they are in
+- what can collide with them
+- what is dangerous
+- what is a projectile
+- what is a support opportunity
+
+Even when the information layer becomes confusing, the driving game should remain mechanically legible.
+
+4.2 Never over-explain the deception systems
+
+Do not show:
+- commandTrust: 42%
+- supportTrust: compromised
+- enemyAwareness: high
+- playerBeliefModel: trusts vans
+
+Instead, express those states through events:
+- the wrong van appears
+- a command leads into danger
+- a civilian flashes headlights before an ambush
+- a support route suddenly contains fewer civilians
+- an extraction message arrives too early
+
+4.3 Let players form theories
+
+The player should think:
+- “Are motorcycles scouts?”
+- “Are road signs safer than radio commands?”
+- “Are repair vans being spoofed?”
+- “Does the enemy know I always take detours?”
+
+The game should neither immediately confirm nor deny these theories.
+
+4.4 Make deception fair
+
+The game may lie, but it must not feel arbitrary.
+
+A false signal should usually have at least one subtle tell:
+- unusual phrasing
+- bad timing
+- missing authentication chirp
+- appearing after enemy scout contact
+- contradicted by civilian behavior
+- route environment feels wrong
+- support vehicle behaves differently
+
+Players should eventually improve at reading the deception.
+
+5. CORE GAME LOOP
+
+Each run proceeds like this:
+
+1. Spawn player on highway.
+2. Scroll road downward to simulate forward motion.
+3. Spawn civilian and enemy traffic.
+4. Present occasional signals:
+   - command messages
+   - roadside signs
+   - civilian warnings
+   - support notices
+5. Player makes driving/combat/trust decisions.
+6. Hidden systems update:
+   - trust
+   - route compromise
+   - enemy awareness
+   - player tendencies
+7. Consequences occur:
+   - ambush
+   - safe supply
+   - decoy van
+   - route split
+   - false extraction
+8. Player survives or is destroyed.
+9. Debrief gives cryptic operational summary.
+
+6. SCENES
+
+6.1 BootScene
+
+Responsibilities:
+- configure scaling
+- initialize global registry defaults
+- transition to PreloadScene
+
+6.2 PreloadScene
+
+Responsibilities:
+- load sprites
+- load audio
+- load bitmap fonts if used
+- create simple generated placeholder textures if art is not ready
+
+Placeholder assets are acceptable early:
+- rectangle player car
+- colored traffic cars
+- striped road
+- simple bullet
+- boxy vans
+- minimal UI panels
+
+6.3 TitleScene
+
+Responsibilities:
+- title
+- start run
+- controls
+- optional “classified archive” later
+- settings
+
+Keep menu minimal and moody.
+
+6.4 BriefingScene
+
+Responsibilities:
+- short mission framing
+- no mechanical over-explanation
+- launch GameScene
+
+Example:
+“Maintain northbound route. Recover support where available. Treat unauthorized transmissions as hostile.”
+
+6.5 GameScene
+
+Responsibilities:
+- instantiate all runtime systems
+- manage update loop
+- own world objects
+- coordinate collisions
+- update UI
+
+Most gameplay work happens here.
+
+6.6 DebriefScene
+
+Responsibilities:
+- display run result
+- score
+- distance
+- enemies destroyed
+- support contacts
+- suspicious signals
+- cryptic intelligence notes
+
+Do not fully expose hidden variables. Hint at them.
+
+Example notes:
+- “Two command packets failed authentication.”
+- “Support convoy behavior inconsistent with known protocol.”
+- “Civilian warnings correlated with later hostile contact.”
+- “Enemy appeared to anticipate detour preference.”
+
+6.7 GameOverScene
+
+May be merged with DebriefScene initially.
+
+7. GAMESTATE / MISSIONSTATE
+
+Create a MissionState object that holds run-level state.
+
+Example fields:
+
+MissionState:
+  runSeed
+  elapsedTime
+  distance
+  score
+  playerDamage
+  playerFuel
+  playerAmmo
+  currentSegmentId
+  currentRouteTag
+  commandTrust
+  supportTrust
+  civilianSignalReliability
+  enemyAwareness
+  routeCompromise
+  signalNoise
+  playerPredictability
+  suspicionLevel
+  activeFlags
+  eventHistory
+  signalHistory
+  supportHistory
+  routeHistory
+
+Use this as the shared source of truth for systems.
+
+8. PLAYER CAR
+
+8.1 Movement
+
+Use Arcade Physics.
+
+Controls:
+- left/right steering
+- accelerate/brake if desired
+- fire weapon
+- optional special weapon later
+
+Recommended MVP movement:
+- constant upward travel illusion via scrolling world
+- player moves left/right and slightly up/down within screen bounds
+- no full free-roaming
+- lane-biased steering but not locked lanes
+
+Important:
+The car should feel responsive, not realistic.
+
+8.2 Player stats
+
+Track:
+- damage
+- fuel
+- ammo
+- weapon level
+- temporary effects
+- current disguise/compromise flags later
+
+8.3 Damage
+
+Damage sources:
+- collisions
+- enemy bullets
+- road hazards
+- ramming enemies
+- failed support contact
+- ambush zones
+
+Use generous early damage tuning. The deception layer is the novelty; the driving should not be punishing too early.
+
+9. VEHICLES
+
+9.1 Base Vehicle class
+
+Fields:
+- sprite
+- type
+- faction
+- role
+- lane
+- speed
+- health
+- damageOnCollision
+- isCivilian
+- isHostile
+- isSupport
+- hiddenRole
+- behaviorState
+- signalBehavior
+- spawnTime
+
+9.2 Civilian Vehicles
+
+Behavior:
+- drive mostly straight
+- avoid erratic motion early
+- may brake or swerve later
+- may emit subtle signals
+
+Civilian signal examples:
+- headlights flash
+- quick lane change away from route
+- brake pulse
+- hazard blink
+- unusual grouping
+
+These should become meaningful later, not from the first second.
+
+9.3 Enemy Vehicles
+
+Types:
+- Rammer: tries to collide
+- Shooter: aligns and fires
+- Cutter: moves laterally to block
+- Scout motorcycle: observes player, may increase enemyAwareness
+- Decoy civilian: appears civilian until close or triggered
+
+9.4 Support Vehicles
+
+Types:
+- Weapons Van
+- Repair Van
+- Fuel Van
+- Decoy Van
+
+Support contact:
+- player aligns behind or beside van
+- van opens
+- pickup occurs
+- benefit or trap is applied
+
+Support may be real, compromised, or decoy.
+
+10. ROAD SYSTEM
+
+10.1 Visual Road
+
+MVP:
+- vertical scrolling road texture
+- lane markers
+- shoulders
+- simple roadside background
+
+Keep it readable.
+
+10.2 Segment Templates
+
+Use authored templates, not full procedural generation.
+
+Segment properties:
+
+{
+  id: "straight_civilian_light",
+  visualType: "straight",
+  length: 1800,
+  laneCount: 4,
+  tags: ["safe", "civilian-light"],
+  spawnProfile: "lowPressure",
+  signalProfile: "normal",
+  possibleEvents: ["supportVan", "minorAmbush"]
+}
+
+Segment tags:
+- safe
+- watched
+- compromised
+- bait
+- support-rich
+- enemy-heavy
+- civilian-heavy
+- signal-noisy
+- roadwork
+- checkpoint
+- river-approach
+- extraction-candidate
+
+10.3 Route Forks
+
+Later Phase 3 feature.
+
+At route forks:
+- player chooses left/right/center route
+- signals may recommend one
+- each route has hidden tags
+- consequences occur downstream
+
+Important:
+Do not require complex map generation. A route fork can simply choose the next segment profile.
+
+11. TRAFFIC SYSTEM
+
+TrafficSystem responsibilities:
+- spawn civilian cars
+- spawn ambient vehicles
+- manage lane distribution
+- prevent impossible overlaps
+- despawn offscreen vehicles
+- regulate density
+
+Inputs:
+- current road segment
+- mission pressure
+- route tags
+- enemyAwareness
+- signalNoise
+
+Outputs:
+- vehicle spawns
+
+MVP rules:
+- no spawn directly on top of player
+- avoid unavoidable walls of traffic
+- enemies introduced gradually
+- civilian density gives route “texture”
+
+12. SPAWN DIRECTOR
+
+SpawnDirector decides what appears and when.
+
+It should consider:
+- elapsed time
+- segment tags
+- player performance
+- trust/deception state
+- enemy awareness
+- pending consequences
+
+Example:
+If player followed a spoofed command, SpawnDirector schedules an ambush in 8 seconds.
+
+Use delayed event scheduling:
+- scheduleEvent(type, delayMs, payload)
+- update checks when event should fire
+
+This is critical for making deception feel causal instead of random.
+
+13. COMBAT SYSTEM
+
+MVP:
+- player fires forward bullets
+- bullets destroy enemies
+- civilians should not be casually destroyed without penalty
+- enemies may fire or ram
+
+Combat rules:
+- civilian hits reduce score / increase heat / damage trust
+- enemy kills increase score
+- shooting support vans has consequences
+- shooting decoys may be correct but risky
+
+Later:
+- oil slick
+- smoke screen
+- missiles
+- side weapons
+- limited ammo
+
+14. SIGNAL SYSTEM
+
+14.1 Purpose
+
+The SignalSystem presents information to the player.
+
+Signal types:
+- radio command
+- road sign
+- civilian cue
+- support notice
+- unknown transmission
+- emergency warning
+- extraction marker
+
+14.2 Signal object
+
+Use data like:
+
+{
+  id,
+  source,
+  visibleText,
+  truthState,
+  confidence,
+  urgency,
+  targetRouteTag,
+  consequenceTag,
+  createdAt,
+  expiresAt,
+  tellType,
+  authenticationState
+}
+
+truthState:
+- true
+- false
+- partial
+- stale
+- bait
+
+authenticationState:
+- authenticated
+- weak
+- missing
+- spoofed
+- unknown
+
+14.3 Display
+
+RadioPanel:
+- shows one message at a time
+- short text
+- optional source label
+- occasional static/flicker
+- no walls of text
+
+AlertTicker:
+- brief messages
+- warnings
+- support calls
+
+Road signs:
+- physical objects on roadside
+- must be readable at speed
+- short phrases only
+
+14.4 Signal examples
+
+True:
+“COMMAND: Support van two miles ahead.”
+
+False:
+“COMMAND: Proceed right for extraction.”
+
+Partial:
+“SIGN: ROADWORK AHEAD” but roadwork exists with enemy cover.
+
+Stale:
+“SUPPORT: Repair unit deployed” but it already left or was destroyed.
+
+Bait:
+“UNKNOWN: Clear route left” leading to low-traffic ambush.
+
+15. TRUST SYSTEM
+
+15.1 Purpose
+
+Tracks reliability of information sources over the run.
+
+Variables:
+- commandTrust
+- supportTrust
+- roadSignTrust
+- civilianSignalReliability
+- unknownSignalDanger
+- routeCompromise
+
+These are internal only.
+
+15.2 Updates
+
+Trust changes based on:
+- enemy spoof events
+- player choices
+- actual outcomes
+- scout presence
+- route compromise
+- support success/failure
+
+Example:
+If motorcycle scout remains alive for 10 seconds:
+- enemyAwareness increases
+- probability of spoofed command increases
+- routeCompromise may rise
+
+15.3 Important design note
+
+Trust is not a morality meter. It is operational state.
+
+Command can be trustworthy early and compromised later.
+
+16. DECEPTION DIRECTOR
+
+16.1 Purpose
+
+This is the heart of the game.
+
+The DeceptionDirector decides when and how the information environment becomes hostile.
+
+It should:
+- choose deception opportunities
+- avoid overusing deception
+- preserve fairness
+- adapt to player behavior
+- create delayed consequences
+- maintain uncertainty
+
+16.2 Deception types
+
+- false command
+- decoy support
+- compromised route
+- fake extraction
+- civilian mimic
+- sign contradiction
+- delayed ambush
+- false safe zone
+- real warning disguised as suspicious
+
+16.3 Deception fairness
+
+Every deception should have one or more tells.
+
+Tell examples:
+- missing authentication chirp
+- message uses unusual wording
+- arrives immediately after scout escaped
+- road sign contradicts radio
+- civilian traffic thins out
+- support van drives too aggressively
+- decoy van lacks escort pattern
+- route has too many clean lanes
+
+16.4 Deception pacing
+
+Do not start with heavy deception.
+
+Suggested run pacing:
+- 0-60 seconds: mostly honest arcade game
+- 60-120 seconds: first ambiguous signal
+- 120-180 seconds: first meaningful falsehood
+- 180+ seconds: adaptation to player habits
+
+17. PLAYER BELIEF MODEL
+
+17.1 Purpose
+
+Infer player tendencies from behavior.
+
+Track:
+- obeysCommandSignals
+- followsRoadSigns
+- trustsSupportVans
+- attacksSupportVans
+- followsCivilianCues
+- killsScoutsQuickly
+- ignoresScouts
+- favorsLeftRoute
+- favorsRightRoute
+- avoidsUnknownSignals
+- shootsFirst
+- preservesCivilians
+- drivesAggressively
+
+17.2 Implementation
+
+Use counters and weighted scores.
+
+Example:
+When command recommends route and player takes it:
+  obeysCommandSignals += 1
+
+When command recommends route and player ignores it:
+  disobeysCommandSignals += 1
+
+Calculate tendency:
+  commandCompliance = obeysCommandSignals / totalCommandRouteSignals
+
+17.3 Enemy adaptation
+
+If commandCompliance is high:
+- increase command spoof chance
+- make false command more rewarding-looking
+- use fewer road sign deceptions
+
+If supportTrust is high:
+- spawn decoy vans
+- fake support notices
+- support ambushes
+
+If player kills scouts quickly:
+- scouts become rarer but more protected
+- enemy uses passive road signs instead
+
+If player ignores civilians:
+- civilian warnings become more important but harder to distinguish
+
+18. CONSEQUENCE SYSTEM
+
+18.1 Purpose
+
+Connect player choices to later outcomes.
+
+Do not always punish immediately.
+
+Examples:
+- Following false command schedules ambush later.
+- Accepting decoy support installs tracker.
+- Ignoring real civilian warning increases roadblock chance.
+- Killing real support reduces future support.
+- Letting scout escape increases spoofing.
+
+18.2 Event history
+
+Track events for debrief:
+- signal shown
+- player response
+- hidden truth
+- consequence triggered
+- outcome
+
+This enables good post-run summaries.
+
+19. UI / HUD
+
+19.1 Main HUD
+
+Show:
+- score
+- damage
+- fuel
+- ammo
+- current weapon
+- distance
+
+Do not clutter.
+
+19.2 Radio Panel
+
+Small panel, probably top or side.
+
+Requirements:
+- readable text
+- short messages
+- source label
+- subtle static animation
+- message expiration
+
+19.3 Alerts
+
+Use sparingly:
+- support nearby
+- weapon armed
+- damage critical
+- route split
+- extraction near
+
+19.4 Debrief UI
+
+Show:
+- run score
+- survival distance
+- enemies destroyed
+- civilian incidents
+- support contacts
+- signal anomalies
+- operational notes
+
+Do not reveal all hidden math.
+
+20. AUDIO
+
+Audio matters a lot.
+
+MVP audio:
+- engine loop
+- weapon fire
+- collision
+- enemy destroyed
+- radio beep
+- signal static
+- support pickup
+- warning tone
+- game over
+
+Deception audio tells:
+- authenticated command chirp
+- missing chirp
+- distorted chirp
+- wrong static profile
+
+This is an excellent subtle way to teach players.
+
+21. DATA-DRIVEN DESIGN
+
+Keep tuning in data files.
+
+tuning.js:
+- player speed
+- enemy spawn rates
+- civilian density
+- trust changes
+- deception probabilities
+- damage values
+- score values
+- message durations
+
+signalTemplates.js:
+- message text
+- source
+- possible truth states
+- tells
+- consequence tags
+
+deceptionRules.js:
+- condition
+- deception type
+- probability
+- cooldown
+- required tells
+- consequence
+
+This will make balancing much easier.
+
+22. MVP BUILD ORDER
+
+WORK ORDER 1: Project Skeleton
+
+Build:
+- Phaser project
+- scene structure
+- placeholder assets
+- GameScene launches successfully
+- fixed-size arcade viewport
+- keyboard input
+
+Acceptance:
+- game runs locally
+- player placeholder appears
+- no console errors
+
+WORK ORDER 2: Road and Player Movement
+
+Build:
+- scrolling road
+- lane markers
+- player car movement
+- screen bounds
+- basic HUD
+
+Acceptance:
+- player can steer smoothly
+- road scrolls continuously
+- car cannot leave road/screen
+
+WORK ORDER 3: Traffic and Collision
+
+Build:
+- civilian traffic spawns
+- lane-based movement
+- collision damage
+- despawn offscreen
+- game over on full damage
+
+Acceptance:
+- traffic feels playable
+- collisions are readable
+- no unavoidable spawn collisions
+
+WORK ORDER 4: Enemy Vehicles and Shooting
+
+Build:
+- hostile vehicles
+- player bullets
+- enemy health
+- enemy destruction
+- score
+- basic enemy movement
+
+Acceptance:
+- player can destroy enemies
+- enemies threaten player
+- civilians remain distinct
+
+WORK ORDER 5: Support Van
+
+Build:
+- weapons/support van spawn
+- support contact zone
+- successful pickup
+- ammo/repair reward
+- support UI alert
+
+Acceptance:
+- player can identify and collect support
+- support interaction is clear
+
+WORK ORDER 6: Signal System
+
+Build:
+- radio panel
+- signal queue
+- road sign objects
+- basic command messages
+- signal history logging
+
+Acceptance:
+- messages appear and expire
+- signals can be triggered by segment/events
+- no deception yet required
+
+WORK ORDER 7: Road Segment Tags
+
+Build:
+- segment templates
+- segment transitions
+- spawn profiles by segment
+- tags affecting traffic/enemy/support density
+
+Acceptance:
+- different segments feel different
+- segment data drives spawns
+
+WORK ORDER 8: Trust and Deception MVP
+
+Build:
+- TrustSystem
+- DeceptionDirector
+- one false command type
+- one decoy support type
+- delayed ambush consequence
+
+Acceptance:
+- false signal can lead to later danger
+- decoy support can appear
+- events are logged for debrief
+
+WORK ORDER 9: Player Belief Model
+
+Build:
+- behavior counters
+- command compliance tracking
+- support trust tracking
+- scout response tracking if scouts exist
+- adaptation hooks
+
+Acceptance:
+- game changes deception type based on player habits
+- no visible debug stats in normal mode
+
+WORK ORDER 10: Debrief Scene
+
+Build:
+- run summary
+- score/distance
+- enemies destroyed
+- support used
+- suspicious signal notes
+- cryptic operational observations
+
+Acceptance:
+- debrief reflects actual logged events
+- hints at deception without fully explaining math
+
+WORK ORDER 11: Polish Pass
+
+Build:
+- better placeholder art
+- UI cleanup
+- audio pass
+- tuning pass
+- difficulty curve
+- bug fixes
+
+Acceptance:
+- game feels like a coherent playable prototype
+- player can complete multiple runs
+- deception is noticeable but not overwhelming
+
+WORK ORDER 12: Divided Highway / Median Split System
+
+Build:
+- RoadLayoutManager for unified and divided highway layouts
+- LaneAnchorGenerator for dynamic lane positions
+- divided_entry, divided_highway, and divided_exit segment types
+- smooth transition from four unified lanes to two separated carriageways and back
+- MedianRenderer for central grass/concrete/guardrail terrain
+- continuous median collision/hazard zones
+- spawn targeting for player_side, opposite_side, and both carriageways
+- at least three divided-road variants
+
+Acceptance:
+- road transitions into and out of divided highway without visual snapping
+- lane anchors update correctly for player, traffic, enemies, and support
+- median renders clearly as non-passable terrain
+- median collision is clean and does not snag vehicles
+- vehicles fully entering the median are destroyed immediately
+- half-entering the median commits the vehicle to destruction, like road-exit hazards
+- player cannot cross the median except in future explicit crossover zones
+- traffic and enemy spawns remain valid on divided roads
+- divided highway fits the current viewport without shrinking vehicle readability
+
+23. INITIAL MVP DECEPTION EXAMPLES
+
+23.1 False Command Ambush
+
+Signal:
+“COMMAND: Maintain right route. Support ahead.”
+
+Hidden truth:
+- spoofed after enemy scout escaped
+
+Tell:
+- no authentication chirp
+- slight static distortion
+- arrives soon after scout event
+
+Player follows:
+- road becomes empty
+- then rammer pair spawns
+- later support is absent
+
+Player ignores:
+- normal route continues
+- possible real support appears later
+
+23.2 Decoy Van
+
+Signal:
+“SUPPORT: Weapons van deployed.”
+
+Hidden truth:
+- decoy if supportTrust is compromised
+
+Tell:
+- van color slightly off
+- opens late
+- no escort beep
+- drives too centered
+
+Player docks:
+- receives ammo but also tracker
+- enemyAwareness increases
+- later ambush chance rises
+
+Player shoots:
+- if decoy, reward
+- if real, future supportTrust decreases
+
+23.3 Civilian Warning
+
+Cue:
+- civilian flashes headlights twice and changes lane away from right side
+
+Hidden truth:
+- right side roadblock ahead
+
+Player responds:
+- avoids roadblock
+
+Player ignores:
+- roadblock spawns
+
+Later twist:
+- enemies may mimic this cue, but imperfectly
+
+24. DIFFICULTY CURVE
+
+Early:
+- mostly honest
+- low traffic
+- obvious enemies
+- real support
+
+Middle:
+- ambiguous signals
+- scouts
+- first false command
+- route tags matter
+
+Late:
+- adaptive deception
+- fake support
+- contradictory signals
+- route compromise
+- stronger enemies
+
+Difficulty should increase by:
+- traffic density
+- enemy coordination
+- signal ambiguity
+- support scarcity
+- adaptation accuracy
+
+Do not increase difficulty only by making cars faster.
+
+25. DEBUG TOOLS
+
+Create debug overlay toggle with a key like F1.
+
+Show:
+- current segment
+- enemyAwareness
+- commandTrust
+- supportTrust
+- routeCompromise
+- active deception
+- player tendency scores
+- pending consequence events
+
+This is for development only.
+
+Normal players should never see it.
+
+26. SAVE / PERSISTENCE
+
+Later use localStorage for:
+- best score
+- longest distance
+- discovered signal notes
+- settings
+- unlocked archive entries
+
+Do not persist hidden trust from run to run at first. Each run should be self-contained.
+
+Later campaign mode may support persistent enemy knowledge.
+
+27. ART DIRECTION
+
+Retro, readable, restrained.
+
+Do:
+- strong silhouettes
+- clear lane markers
+- readable vehicles
+- limited palette
+- subtle scanline/radio effects
+- crisp UI
+
+Do not:
+- overdecorate the road
+- obscure cars with effects
+- use tiny unreadable text
+- overload screen with lore
+- make deception depend on imperceptible pixels
+
+28. WRITING STYLE
+
+Messages should be short, official, and slightly cold.
+
+Good:
+“COMMAND: Proceed north.”
+“SUPPORT: Van deployed.”
+“UNKNOWN: Left route clear.”
+“WARNING: Signal mismatch.”
+“SIGN: DETOUR AHEAD.”
+“COMMAND: Ignore civilian interference.”
+
+Bad:
+“Hey agent, we think you should maybe go left because there might be a bad guy up ahead.”
+
+Keep the writing terse.
+
+29. SUCCESS CRITERIA
+
+The prototype succeeds if:
+
+- It is immediately playable as a top-down driving combat game.
+- The player understands movement, collision, shooting, and support.
+- The player begins noticing inconsistent information.
+- At least one run creates a “wait, did the game lie to me?” moment.
+- Deception is traceable after the fact in the debrief.
+- The game feels deeper than it looks.
+
+30. MOST IMPORTANT WARNING
+
+Do not build the intelligence layer before the driving is fun.
+
+The correct order is:
+
+1. Fun driving.
+2. Clear traffic/combat.
+3. Useful support.
+4. Signals.
+5. Deception.
+6. Adaptation.
+7. Debrief.
+
+The intelligence war only works if the arcade layer is strong enough to carry the player moment to moment.
+
+31. NORTH STAR
+
+The player should start by thinking:
+
+“I am playing a retro car combat game.”
+
+Then, after a few runs:
+
+“I think command has been compromised.”
+
+Then, after mastering the game:
+
+“I survived because I understood what the enemy wanted me to believe.”
+
+That is the game.

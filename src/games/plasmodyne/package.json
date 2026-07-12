@@ -1,0 +1,29 @@
+{
+  "name": "plasmodyne",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "review:export": "node tools/export_seed_preview.js",
+    "render:droid:sphere": "blender --background --python animation_factory/tools/blender/render_droid_sphere.py",
+    "render:droid:0series": "blender --background --python animation_factory/tools/blender/render_droid_0series.py",
+    "render:droid:1series": "blender --background --python animation_factory/tools/blender/render_droid_1series.py",
+    "render:droid:2series": "blender --background --python animation_factory/tools/blender/render_droid_2series.py",
+    "render:droid:3series": "blender --background --python animation_factory/tools/blender/render_droid_3series.py",
+    "render:droid:4series": "blender --background --python animation_factory/tools/blender/render_droid_4series.py",
+    "render:droid:5series": "blender --background --python animation_factory/tools/blender/render_droid_5series.py",
+    "render:droid:6series": "blender --background --python animation_factory/tools/blender/render_droid_6series.py",
+    "render:droid:7series": "blender --background --python animation_factory/tools/blender/render_droid_7series.py",
+    "render:droid:8series": "blender --background --python animation_factory/tools/blender/render_droid_8series.py",
+    "render:droid:9series": "blender --background --python animation_factory/tools/blender/render_droid_9series.py",
+    "render:droid:animations": "blender --background --python animation_factory/tools/blender/render_droid_animation.py"
+  },
+  "dependencies": {
+    "phaser": "^3.90.0",
+    "vite": "^7.1.12"
+  },
+  "devDependencies": {}
+}

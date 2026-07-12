@@ -1,0 +1,54 @@
+{
+  "name": "wingtip-arcade",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "src/games/plasmodyne",
+    "src/games/concordant",
+    "src/games/boondock-trail",
+    "src/games/stone-horses",
+    "src/games/coach",
+    "src/games/lords-of-chaos",
+    "src/games/ancient-suffering-reborn",
+    "src/games/math-blaster-neo",
+    "src/games/dead-channels",
+    "src/games/spy-hunter-apex"
+  ],
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "npm run build:games && npm run build:arcade",
+    "build:arcade": "tsc && vite build",
+    "build:games": "npm run build:spy-hunter-apex && npm run build:plasmodyne && npm run build:concordant && npm run build:boondock-trail && npm run build:stone-horses && npm run build:coach && npm run build:lords-of-chaos && npm run build:ancient-suffering-reborn && npm run build:math-blaster-neo && npm run build:dead-channels && npm run copy:games",
+    "build:spy-hunter-apex": "npm --prefix src/games/spy-hunter-apex run build",
+    "build:plasmodyne": "npm --prefix src/games/plasmodyne run build",
+    "build:concordant": "npm --prefix src/games/concordant run build",
+    "build:boondock-trail": "npm --prefix src/games/boondock-trail run build",
+    "build:stone-horses": "npm --prefix src/games/stone-horses run build",
+    "build:coach": "npm --prefix src/games/coach run build",
+    "build:lords-of-chaos": "npm --prefix src/games/lords-of-chaos run build",
+    "build:ancient-suffering-reborn": "npm --prefix src/games/ancient-suffering-reborn run build",
+    "build:math-blaster-neo": "npm --prefix src/games/math-blaster-neo run build",
+    "build:dead-channels": "npm --prefix src/games/dead-channels run build",
+    "copy:games": "node tools/copy-games.js",
+    "build:deploy": "npm run build && powershell -ExecutionPolicy Bypass -File tools/package-deploy.ps1",
+    "package:deploy": "npm run build:deploy",
+    "preview": "vite preview --host 127.0.0.1",
+    "prepare:media": "powershell -ExecutionPolicy Bypass -File tools/prepare-media.ps1",
+    "validate:site": "node tools/validate-site.mjs",
+    "validate:browser": "node tools/browser-validation.mjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.1",
+    "vite": "^5.2.11"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "playwright": "^1.61.1",
+    "typescript": "^5.4.5"
+  }
+}

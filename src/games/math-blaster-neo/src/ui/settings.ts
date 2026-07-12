@@ -1,0 +1,1 @@
+export { settingsScreen } from "./screens";

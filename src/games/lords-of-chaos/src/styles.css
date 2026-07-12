@@ -1,0 +1,815 @@
+@font-face {
+  font-family: ChaosTitle;
+  src: url("../assets/fonts/title.ttf");
+}
+
+@font-face {
+  font-family: ChaosText;
+  src: url("../assets/fonts/messages.ttf");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body,
+main {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #020403;
+  color: #eaffea;
+  font-family: ChaosText, Georgia, serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.title-screen {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 28px;
+  padding: 32px;
+  isolation: isolate;
+  background: #020303 url("../assets/images/title_background.png") center / contain no-repeat;
+}
+
+.title-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.58) 72%);
+}
+
+h1 {
+  margin: 0;
+  padding: 10px 18px;
+  border: 2px solid #3ee478;
+  color: #d85858;
+  font-family: ChaosTitle, serif;
+  font-size: clamp(42px, 8vw, 104px);
+  font-weight: 400;
+  text-align: center;
+}
+
+.start-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #d8d8d8;
+  font-size: 26px;
+}
+
+.start-row input {
+  width: 220px;
+  padding: 6px 10px;
+  border: 1px solid #5f70d8;
+  background: #101326;
+  color: #b9c0ff;
+}
+
+.help-button {
+  width: 42px;
+  min-height: 42px;
+  border-radius: 50%;
+  border-color: #f1ff8a;
+  background: #122016;
+  color: #f1ff8a;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.help-button-game {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 7;
+}
+
+button {
+  min-height: 38px;
+  border: 1px solid #90ee90;
+  background: #0b180f;
+  color: #ecffec;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease, transform 120ms ease;
+}
+
+button:hover:not(:disabled) {
+  border-color: #d8ffd8;
+  background: #17351f;
+  color: #ffffff;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #f1ff8a;
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.48;
+  border-color: #3a513d;
+  background: #080d09;
+  color: #789078;
+}
+
+.game {
+  display: grid;
+  grid-template-columns: minmax(420px, 1.25fr) minmax(340px, 0.8fr);
+  grid-template-rows: minmax(180px, 1fr) auto auto minmax(150px, 0.52fr);
+  grid-template-areas:
+    "room map"
+    "objective map"
+    "controls status"
+    "log inventory";
+  gap: 12px;
+  height: 100vh;
+  padding: 12px;
+  background: radial-gradient(circle at center, #061006 0, #020403 65%);
+}
+
+.panel {
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid rgba(144, 238, 144, 0.72);
+  background: rgba(4, 10, 6, 0.96);
+  box-shadow: inset 0 0 0 1px rgba(144, 238, 144, 0.12);
+}
+
+.panel-heading {
+  padding: 7px 10px;
+  border-bottom: 1px solid rgba(144, 238, 144, 0.55);
+  background: #071309;
+  color: #9eff9e;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.room-panel {
+  grid-area: room;
+  border-color: #b4ffb4;
+}
+
+.room-text {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  height: 100%;
+  overflow-y: auto;
+  padding: 26px 34px;
+  line-height: 1.45;
+}
+
+.room-text h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(34px, 4.2vw, 58px);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.room-region {
+  color: #87d987;
+  font-size: 22px;
+  text-transform: capitalize;
+}
+
+.room-body {
+  max-width: 70ch;
+  margin: 0;
+  color: #eef9ee;
+  font-size: clamp(22px, 2.15vw, 31px);
+  line-height: 1.42;
+}
+
+.nearby {
+  max-width: 70ch;
+  padding: 12px 14px;
+  border: 1px solid rgba(144, 238, 144, 0.34);
+  background: #071108;
+}
+
+.nearby-title {
+  margin-bottom: 8px;
+  color: #b7ffb7;
+  font-size: 17px;
+  text-transform: uppercase;
+}
+
+.nearby ul {
+  margin: 0;
+  padding-left: 22px;
+  color: #f3fff3;
+  font-size: 21px;
+  line-height: 1.35;
+}
+
+.nearby p {
+  margin: 0;
+  color: #8fb38f;
+  font-size: 19px;
+}
+
+.notice-danger {
+  color: #ffb7b7;
+}
+
+.notice-relic {
+  color: #fff07a;
+}
+
+.notice-item {
+  color: #cdfacd;
+}
+
+.objective-panel {
+  grid-area: objective;
+}
+
+.objective-status {
+  display: grid;
+  gap: 7px;
+  padding: 12px;
+}
+
+.objective-line,
+.stat-row {
+  display: grid;
+  grid-template-columns: minmax(74px, 0.65fr) minmax(0, 1.35fr);
+  gap: 10px;
+  align-items: baseline;
+}
+
+.objective-line span,
+.stat-row span {
+  color: #8fbd8f;
+}
+
+.objective-line strong,
+.stat-row strong {
+  color: #f0fff0;
+  font-weight: 400;
+}
+
+.danger-safe strong::before {
+  content: "OK ";
+  color: #9eff9e;
+}
+
+.danger-warning strong::before {
+  content: "WARN ";
+  color: #ffe56b;
+}
+
+.danger-danger strong::before {
+  content: "DANGER ";
+  color: #ff7777;
+}
+
+.command-panel {
+  grid-area: controls;
+  position: sticky;
+  bottom: 12px;
+  z-index: 4;
+  align-self: end;
+}
+
+.command-grid {
+  display: grid;
+  grid-template-columns: minmax(230px, 1fr) minmax(150px, 0.65fr);
+  gap: 14px;
+  align-items: center;
+  padding: 12px;
+}
+
+.direction-pad {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(66px, 1fr));
+  grid-template-rows: repeat(3, 46px);
+  gap: 8px;
+}
+
+.direction-pad button {
+  background: #90ee90;
+  color: #001b06;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.direction-pad button span {
+  display: block;
+  color: #134c19;
+  font-size: 12px;
+}
+
+.direction-pad button:hover:not(:disabled) {
+  background: #d7ffd7;
+  color: #000;
+  transform: translateY(-1px);
+}
+
+.direction-pad [data-dir="n"] {
+  grid-column: 2;
+}
+
+.direction-pad [data-dir="w"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.direction-pad [data-dir="e"] {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.direction-pad [data-dir="s"] {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.action-stack {
+  display: grid;
+  gap: 8px;
+}
+
+.action-button {
+  width: 100%;
+  min-height: 42px;
+  background: #d6d6d1;
+  color: #000;
+  font-size: 20px;
+}
+
+.action-button:hover:not(:disabled),
+.action-button:focus-visible {
+  background: #ffffff;
+  color: #000;
+}
+
+.secondary-action {
+  background: #182118;
+  color: #dbeedb;
+}
+
+.log-panel {
+  grid-area: log;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.messages {
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 10px 14px 14px;
+  background: #f7f7ef;
+  color: #111;
+  font-size: 17px;
+  line-height: 1.32;
+}
+
+.message {
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.message-old {
+  opacity: 0.58;
+}
+
+.message-movement {
+  color: #4e604e;
+}
+
+.message-combat {
+  color: #1e36b0;
+  font-weight: 700;
+}
+
+.message-item {
+  color: #126415;
+}
+
+.message-relic,
+.message-level {
+  color: #9c5600;
+  font-weight: 700;
+}
+
+.message-danger {
+  color: #b42020;
+  font-weight: 700;
+}
+
+.message-system {
+  color: #222;
+}
+
+.map-panel {
+  grid-area: map;
+  display: grid;
+  grid-template-rows: auto minmax(260px, 1fr) auto;
+}
+
+#map {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  padding: 8px 10px;
+  border-top: 1px solid rgba(144, 238, 144, 0.36);
+  color: #c9f7c9;
+  font-size: 14px;
+}
+
+.map-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.map-legend i {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  border: 1px solid #9eff9e;
+}
+
+.legend-player {
+  background: #234be6;
+  box-shadow: 0 0 7px #9eff9e;
+}
+
+.legend-explored {
+  background: #3f7f52;
+}
+
+.legend-unexplored {
+  background: #000;
+}
+
+.legend-enemy {
+  background: #c92626;
+}
+
+.legend-item {
+  background: #a99700;
+}
+
+.legend-objective {
+  background: #f0dc00;
+}
+
+.status-panel {
+  grid-area: status;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.76);
+}
+
+.modal-box {
+  width: min(680px, 92vw);
+  border: 1px solid #90ee90;
+  background: #050906;
+  box-shadow: 0 0 28px rgba(62, 228, 120, 0.18), inset 0 0 0 1px rgba(144, 238, 144, 0.14);
+  color: #eaffea;
+  padding: 28px;
+}
+
+.modal-box h2 {
+  margin-bottom: 16px;
+  color: #ffffff;
+  font-size: 30px;
+}
+
+.modal-box p {
+  margin: 8px 0;
+  color: #e7f6e7;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.intro-box button {
+  margin-top: 18px;
+  min-width: 170px;
+}
+
+.help-box {
+  position: relative;
+}
+
+.help-box dl {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.55fr) minmax(0, 1fr);
+  gap: 8px 18px;
+  margin: 0 0 22px;
+  font-size: 21px;
+}
+
+.help-box dt {
+  color: #9eff9e;
+}
+
+.help-box dd {
+  margin: 0;
+  color: #f1fff1;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  min-height: 32px;
+  padding: 2px 10px;
+}
+
+.tutorial-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 18;
+  display: flex;
+  align-items: start;
+  gap: 12px;
+  width: min(520px, calc(100vw - 28px));
+  padding: 14px 16px;
+  transform: translateX(-50%);
+  border: 1px solid #d9ffd9;
+  background: rgba(4, 10, 6, 0.98);
+  box-shadow: 0 0 20px rgba(144, 238, 144, 0.24);
+  color: #efffef;
+}
+
+.tutorial-toast p {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.tutorial-toast button {
+  order: 2;
+  min-width: 30px;
+  min-height: 30px;
+  margin-left: auto;
+  color: #f1ff8a;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px;
+  color: #d9ffd9;
+  font-size: 17px;
+}
+
+.stat-group {
+  min-width: 0;
+  padding: 9px;
+  border: 1px solid rgba(144, 238, 144, 0.32);
+  background: #071008;
+}
+
+.stat-group h3 {
+  margin: 0 0 8px;
+  color: #9eff9e;
+  font-size: 15px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.stat-row {
+  padding: 2px 0;
+}
+
+.hp-warning strong {
+  color: #ffe56b;
+}
+
+.hp-warning strong::after {
+  content: " warning";
+  font-size: 12px;
+}
+
+.hp-danger strong {
+  color: #ff7777;
+}
+
+.hp-danger strong::after {
+  content: " danger";
+  font-size: 12px;
+}
+
+.inventory-panel {
+  grid-area: inventory;
+}
+
+.inventory-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px;
+}
+
+h2 {
+  margin: 0 0 8px;
+  color: #c8ffc8;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.inventory,
+.equipment {
+  display: grid;
+  gap: 6px;
+  min-height: 72px;
+  color: #dcefdc;
+  font-size: 17px;
+}
+
+.inventory button {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  border-color: rgba(144, 238, 144, 0.2);
+  background: #101810;
+  text-align: left;
+}
+
+.inventory button::before {
+  content: "- ";
+}
+
+.equipment span,
+.empty-state {
+  padding: 7px 8px;
+  border: 1px solid rgba(144, 238, 144, 0.28);
+  background: #101310;
+  text-align: left;
+}
+
+.equipment b {
+  display: block;
+  color: #8fbd8f;
+  font-weight: 400;
+}
+
+.empty-state {
+  color: #789078;
+}
+
+@media (max-width: 1180px) {
+  body {
+    overflow: auto;
+  }
+
+  .game {
+    height: auto;
+    min-height: 100vh;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+    grid-template-areas:
+      "room room"
+      "objective controls"
+      "map status"
+      "inventory inventory"
+      "log log";
+  }
+
+  .help-button-game {
+    top: 12px;
+    right: 12px;
+  }
+
+  .log-panel {
+    min-height: 260px;
+    max-height: 420px;
+  }
+
+  .map-panel {
+    min-height: 430px;
+  }
+
+  .command-panel {
+    bottom: 0;
+  }
+
+  .modal-box {
+    padding: 22px;
+  }
+
+  .modal-box p,
+  .help-box dl,
+  .tutorial-toast p {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 760px) {
+  .game {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "room"
+      "objective"
+      "controls"
+      "map"
+      "status"
+      "inventory"
+      "log";
+    padding: 8px;
+  }
+
+  .room-text {
+    padding: 20px;
+  }
+
+  .room-text h2 {
+    font-size: 34px;
+  }
+
+  .room-body {
+    font-size: 22px;
+  }
+
+  .command-panel {
+    position: sticky;
+    bottom: 0;
+  }
+
+  .command-grid,
+  .inventory-wrap,
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .map-panel {
+    min-height: 360px;
+  }
+
+  .log-panel {
+    min-height: 240px;
+    max-height: 360px;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 1181px) {
+  .game {
+    grid-template-rows: minmax(160px, 1fr) auto auto minmax(120px, 0.42fr);
+  }
+
+  .room-text {
+    padding: 18px 28px;
+  }
+
+  .room-body {
+    font-size: 22px;
+  }
+
+  .messages {
+    font-size: 15px;
+  }
+
+  .stats,
+  .inventory,
+  .equipment {
+    font-size: 15px;
+  }
+}
