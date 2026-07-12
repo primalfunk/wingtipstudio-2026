@@ -175,7 +175,7 @@ Some become AI tools.
 
 Some become wonderfully strange experiments that don't fit neatly into any category.
 
-If they spark curiosity—or inspire someone else to build something interesting—they've done their job.
+If they spark curiosity or inspire someone else to build something interesting, they've done their job.
 
 ---
 
