@@ -1,106 +1,183 @@
 # Wingtip Studio
 
-Wingtip Studio is a Vite + React site containing Home, Arcade, Music, and Contact pages. The games remain separately built applications loaded by the Arcade shell.
+> *An independent creative workshop exploring games, music, artificial intelligence, procedural generation, and experimental software.*
 
-## Routes
+Wingtip Studio is the home of my independent projects—a place where software engineering, game design, music composition, and creative technology intersect.
 
-- `/` - Home
-- `/arcade` - categorized Arcade catalog
-- `/music` - original compositions and game soundtracks, filterable by composer
-- `/videos` - music videos and moving-image work
-- `/contact` - editable About, mission, and email content
-- Existing game routes such as `/plasmodyne` remain unchanged.
+This repository contains the source code for the Wingtip Studio website, which serves as both a portfolio and an evolving development journal. Visitors can browse released games, original music, videos, and follow the progress of projects currently under active development.
 
-Direct route refreshes are handled by `public/_redirects` and `public/.htaccess`.
+## Current Projects
 
-## Shared structure and editable content
+- **LODEX** — A local-first AI software engineering assistant focused on planning, understanding, and safely modifying codebases.
+- **Cinelingus** — An experimental filmmaking system that remixes dialogue, performances, and timing to produce entirely new cinematic experiences.
+- **Billionaire Simulator** *(in development)* — A large-scale business, investment, and economic simulation.
+- **Enchanted Castle Rebooted** *(planned)* — A modern parser adventure inspired by classic interactive fiction.
+- **Angle Wars** *(Bureau of Bad Ideas)* — A chaotic artillery game carrying the spirit of classics like *Scorched Earth*.
 
-- `src/components/SiteShell.tsx` - shared logo, navigation, active-page state, and footer
-- `public/assets/wingtip-logo-transparent.png` - the one reused logo asset
-- `src/content/siteContent.ts` - Home introduction and Contact text
-- `src/content/gameCatalog.ts` - game descriptions, order, controls notes, and platform classification
-- `src/content/musicCatalog.json` - the complete editable music metadata catalog
-- `src/music/TrackCard.tsx` - reusable Original, Soundtrack, and Video card
-- `src/music/SharedMediaPlayer.tsx` - the one audio/video player used by every card
+---
 
-## Music data model
+# Website Sections
 
-Music and Videos share one `collection` named Studio Compositions and one flat `tracks` array. The Music page renders `original` and `soundtrack` records with an All/Jared/K Daniel composer filter; the Videos page renders `video` records. Every track has a `section` of `original`, `soundtrack`, or `video`. This supports future filtering by section, composer, year, title, featured state, or sort order without changing the page architecture.
+| Route | Description |
+|-------|-------------|
+| `/` | Home |
+| `/arcade` | Game collection |
+| `/music` | Original music and game soundtracks |
+| `/videos` | Music videos and moving-image work |
+| `/contact` | About Wingtip Studio, current projects, GitHub, and contact information |
 
-Set exactly the track you want highlighted to `"featured": true`. The featured composition on Music and Home is selected from this metadata.
+Existing game routes (such as `/plasmodyne`) continue to function independently.
 
-Track fields:
+---
 
-- `id`, `title`, `section`, `description`
-- `author`, `composer`, `composerNotes`
-- `duration`, `releaseYear`, `releaseDate`
-- `audioSrc`, `videoSrc`, `thumbnail`
-- `featured`, `sortOrder`, `gameTitle`
+# Technology
 
-The shared player is created only after a visitor selects Listen or Watch. Choosing another work replaces the current source, so only one media element can play. Artwork priority is track `thumbnail`, then the branded section placeholder. The collection-level `artwork` field is ready for future use.
+- React
+- TypeScript
+- Vite
+- Responsive design
+- Shared media player architecture
 
-### Add an Original Composition
+---
 
-Use `"section": "original"`, supply `audioSrc`, and set `gameTitle` to `null`.
+# Repository Structure
 
-### Add a Game Soundtrack track
+```
+src/
+    components/
+    content/
+    music/
+    pages/
+    styles/
 
-Use `"section": "soundtrack"`, supply `audioSrc`, and set `gameTitle` to the game name. Several tracks from one game remain separate track records but appear together in the Game Soundtracks section.
-
-### Add a Music Video
-
-Use `"section": "video"`, supply `videoSrc`, and set `audioSrc` to `null` unless a separate audio version is also available.
-
-Example file:
-
-`public/media/music/albums/night-signals/audio/01-glass-orbit.mp3`
-
-Matching metadata in `src/content/musicCatalog.json`:
-
-```json
-{
-  "id": "glass-orbit",
-  "title": "Glass Orbit",
-  "section": "original",
-  "description": "Replace with final description.",
-  "author": "Jared Menard",
-  "composer": "Jared Menard",
-  "duration": "3:42",
-  "releaseYear": 2026,
-  "releaseDate": "2026",
-  "composerNotes": "Replace with final notes.",
-  "audioSrc": "/media/music/albums/night-signals/audio/01-glass-orbit.mp3",
-  "videoSrc": null,
-  "thumbnail": "/media/music/artwork/glass-orbit.webp",
-  "featured": false,
-  "sortOrder": 27,
-  "gameTitle": null
-}
+public/
+    assets/
+    media/
 ```
 
-Uploaded media sources remain untouched in `new_media`, and artwork sources remain untouched in `artwork_new`. Run `npm run prepare:media` to regenerate normalized copies. WAV sources become high-quality VBR MP3 files; PNG artwork becomes web-optimized WebP in `public/media/music/artwork`.
+Key editable content:
 
-## Exact media destinations
+| File | Purpose |
+|------|---------|
+| `src/content/siteContent.ts` | Homepage and About page content |
+| `src/content/gameCatalog.ts` | Arcade metadata |
+| `src/content/musicCatalog.json` | Music and video catalog |
+| `src/components/SiteShell.tsx` | Shared navigation and layout |
+| `src/music/SharedMediaPlayer.tsx` | Audio/video playback |
 
-- Audio: `<project-root>\public\media\music\albums\<album-slug>\audio\`
-- Videos: `<project-root>\public\media\music\albums\<album-slug>\video\`
-- Current video collection: `<project-root>\public\media\music\collections\music-videos\video\`
-- Artwork: `<project-root>\public\media\music\artwork\`
+---
 
-Supported formats are MP3, MP4, JPG, PNG, and WebP. Use lowercase, hyphen-separated filenames without spaces. Public files appear immediately in development; rebuild before deployment.
+# Music Library
 
-## Wingtip Archives visual identity
+Music and videos are driven entirely by metadata in `musicCatalog.json`.
 
-The homepage hero uses `artwork_new/wingtip_entity.png` as Archive Item 001, The Imagination Engine. `npm run prepare:media` produces the optimized `public/media/music/artwork/wingtip-entity.webp` derivative while preserving the source PNG. Hero copy, accessible alt text, archive number, title, and caption are editable in `src/content/siteContent.ts`.
+Supported sections:
 
-Future archive artwork should use the same restrained pattern: sequential Archive Item number, artifact title, one-line recovery caption, dark archival background, and optional track `thumbnail` metadata. Keep lore brief so the artifacts remain suggestive rather than explanatory.
+- Original compositions
+- Game soundtracks
+- Music videos
 
-## Commands
+Each track includes metadata such as:
 
-- `npm run dev` - local development
-- `npm run validate:site` - validate routes, sections, metadata IDs, and media paths
-- `npm run validate:browser` - validate five responsive widths, media switching, console output, and contact email
-- `npm run build` - build all games and the production site
-- `npm run build:deploy` - create the uploadable archive
+- title
+- composer
+- description
+- duration
+- release date
+- artwork
+- audio/video source
+- featured status
+- sort order
 
+The homepage automatically highlights whichever track is marked:
 
+```json
+"featured": true
+```
+
+Only one media player instance exists on the page at a time.
+
+---
+
+# Media Pipeline
+
+Raw media is never served directly.
+
+Source folders:
+
+```
+new_media/
+artwork_new/
+```
+
+Generate optimized assets with:
+
+```bash
+npm run prepare:media
+```
+
+This process:
+
+- converts WAV → MP3
+- optimizes artwork → WebP
+- preserves original source files
+- copies finished assets into `/public/media`
+
+---
+
+# Development
+
+Run locally:
+
+```bash
+npm install
+npm run dev
+```
+
+Useful commands:
+
+```bash
+npm run dev
+npm run validate:site
+npm run validate:browser
+npm run build
+npm run build:deploy
+```
+
+---
+
+# Wingtip Archives
+
+The homepage features an ongoing fictional museum collection known as the **Wingtip Archives**.
+
+Each artifact is presented as a recovered object with:
+
+- Archive number
+- Title
+- Brief recovery caption
+- Minimal accompanying lore
+
+The intention is to evoke curiosity rather than explain everything outright.
+
+---
+
+# Philosophy
+
+Wingtip Studio is built around a simple idea:
+
+> **Build the projects that don't already exist.**
+
+Some become games.
+
+Some become music.
+
+Some become AI tools.
+
+Some become wonderfully strange experiments that don't fit neatly into any category.
+
+If they spark curiosity—or inspire someone else to build something interesting—they've done their job.
+
+---
+
+© Jared Menard  
+Wingtip Studio
