@@ -10,9 +10,4 @@ export const siteContent = {
       caption: "Recovered from the Wingtip Archives.",
     },
   },
-  contact: {
-    about: "Biography placeholder - replace this text with the final Wingtip Studio and Jared Menard biography.",
-    mission: "Mission placeholder - replace this text with the final statement about the work Wingtip Studio is trying to make.",
-    email: "jared.d.menard@gmail.com",
-  },
 } as const;

@@ -1,9 +1,12 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import SiteShell from "./components/SiteShell";
 import HomePage from "./pages/HomePage";
+import ProfessionalPage from "./pages/ProfessionalPage";
+import ProjectsPage from "./pages/ProjectsPage";
 import MusicPage from "./pages/MusicPage";
 import VideosPage from "./pages/VideosPage";
-import ContactPage from "./pages/ContactPage";
+import AboutPage from "./pages/AboutPage";
+import ConnectPage from "./pages/ConnectPage";
 import ArcadeHome from "./arcade/ArcadeHome";
 import GameFrame from "./arcade/GameFrame";
 
@@ -25,10 +28,14 @@ export default function App() {
     <Routes>
       <Route element={<SiteShell />}>
         <Route path="/" element={<HomePage />} />
+        <Route path="/professional" element={<ProfessionalPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/arcade" element={<ArcadeHome />} />
         <Route path="/music" element={<MusicPage />} />
         <Route path="/videos" element={<VideosPage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/connect" element={<ConnectPage />} />
+        <Route path="/contact" element={<Navigate to="/connect" replace />} />
       </Route>
       {gameRoutes.map(([path, title, src]) => <Route key={path} path={path} element={<GameFrame title={title} src={src} />} />)}
       <Route path="*" element={<Navigate to="/" replace />} />

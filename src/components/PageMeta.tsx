@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { siteLinks } from "../content/siteLinks";
 
 export default function PageMeta({ title, description }: { title: string; description: string }) {
   useEffect(() => {
@@ -10,6 +11,14 @@ export default function PageMeta({ title, description }: { title: string; descri
       document.head.append(meta);
     }
     meta.content = description;
+
+    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.append(canonical);
+    }
+    canonical.href = new URL(window.location.pathname, siteLinks.site).href;
   }, [description, title]);
   return null;
 }

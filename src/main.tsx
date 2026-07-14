@@ -7,7 +7,7 @@ import "./site.css";
 import "./music-phase2.css";
 import "./home-phase2.css";
 import "./section-split.css";
-import "./contact-page.css";
+import "./editorial-pages.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

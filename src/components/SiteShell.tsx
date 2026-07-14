@@ -1,11 +1,16 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { siteLinks } from "../content/siteLinks";
+import PageTransition from "./PageTransition";
 
 const navigation = [
   { to: "/", label: "Home", end: true },
-  { to: "/arcade", label: "Arcade", end: false },
+  { to: "/projects", label: "Projects", end: false },
+  { to: "/arcade", label: "Games", end: false },
   { to: "/music", label: "Music", end: false },
   { to: "/videos", label: "Videos", end: false },
-  { to: "/contact", label: "Contact", end: false }
+  { to: "/about", label: "Studio", end: false },
+  { to: "/professional", label: "Professional", end: false },
+  { to: "/connect", label: "Connect", end: false }
 ];
 
 export default function SiteShell() {
@@ -23,10 +28,10 @@ export default function SiteShell() {
           ))}
         </nav>
       </header>
-      <Outlet />
+      <PageTransition />
       <footer className="site-footer">
         <span>Wingtip Studio</span>
-        <a href="mailto:jared.d.menard@gmail.com">jared.d.menard@gmail.com</a>
+        <a href={`mailto:${siteLinks.email}`}>{siteLinks.email}</a>
       </footer>
     </div>
   );
